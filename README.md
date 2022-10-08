@@ -1,4 +1,4 @@
-# app_teacher_planner
+# ACADOCEN
 
 A new Flutter project.
 
