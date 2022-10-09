@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/background.dart';
+
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -11,8 +13,8 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: Text('Login'),
+      body: BackgroundColor(
+        title: 'Acadocen',
       ),
     );
   }
