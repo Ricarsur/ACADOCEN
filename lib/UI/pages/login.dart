@@ -17,6 +17,14 @@ class _LoginState extends State<Login> {
         children: [
           const BackgroundColor(title: 'Acadocen'),
           Padding(
+            padding: const EdgeInsets.only(top: 200),
+            child: Image.asset(
+              'assets/images/logo.png',
+              height: 200,
+              width: 200,
+            ),
+          ),
+          Padding(
               padding: const EdgeInsets.only(top: 200),
               child: Column(
                 children: const [
