@@ -12,9 +12,26 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: BackgroundColor(
-        title: 'Acadocen',
+    return Scaffold(
+      body: Stack(
+        children: [
+          const BackgroundColor(title: 'Acadocen'),
+          Padding(
+              padding: const EdgeInsets.only(top: 200),
+              child: Column(
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(60, 20, 60, 0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Username',
+                      ),
+                    ),
+                  ),
+                ],
+              )),
+        ],
       ),
     );
   }

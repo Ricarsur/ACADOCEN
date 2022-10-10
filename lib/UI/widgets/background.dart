@@ -51,11 +51,11 @@ class BackgroundWhite extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: const EdgeInsets.only(top: 120),
-        decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(50.0),
-                topRight: Radius.circular(50.0))));
+      margin: const EdgeInsets.only(top: 120),
+      decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(50.0), topRight: Radius.circular(50.0))),
+    );
   }
 }
