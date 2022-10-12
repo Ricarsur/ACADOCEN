@@ -1,5 +1,6 @@
 import 'package:acadocen/UI/pages/register.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../widgets/background.dart';
 import '../widgets/button.dart';
@@ -64,11 +65,7 @@ class _LoginState extends State<Login> {
                                           decoration: TextDecoration.underline),
                                     ),
                                     onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (_) =>
-                                                  const Register()));
+                                      Get.to(() => const Register());
                                     },
                                   )),
                             ],

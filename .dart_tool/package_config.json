@@ -86,6 +86,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "get",
+      "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/get-4.6.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
       "name": "google_fonts",
       "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/google_fonts-3.0.1",
       "packageUri": "lib/",
@@ -290,7 +296,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-10-10T23:18:48.318650Z",
+  "generated": "2022-10-12T22:21:37.026051Z",
   "generator": "pub",
   "generatorVersion": "2.18.2"
 }
