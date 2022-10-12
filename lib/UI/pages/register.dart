@@ -31,8 +31,8 @@ class _RegisterState extends State<Register> {
           ),
         ),
         Padding(
-            padding: const EdgeInsets.fromLTRB(60, 150, 60, 0),
-            child: Column(children: const [
+            padding: const EdgeInsets.fromLTRB(40, 130, 40, 0),
+            child: ListView(children: const [
               TexField(
                 text: 'Nombre',
               ),
@@ -61,7 +61,8 @@ class _RegisterState extends State<Register> {
                 text: 'Aceptar términos y condiciones',
               ),
               SizedBox(height: 20),
-              Button(text: 'Iniciar sesión'),
+              Button(text: 'Registrarse'),
+              SizedBox(height: 30),
             ])),
       ],
     ));
