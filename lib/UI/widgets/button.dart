@@ -1,4 +1,6 @@
+import 'package:acadocen/UI/pages/schedule.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Button extends StatelessWidget {
   final String text;
@@ -33,7 +35,10 @@ class Button extends StatelessWidget {
                       fontSize: 20,
                       fontWeight: FontWeight.bold),
                 ),
-                onPressed: () {}),
+                onPressed: () {
+                  //
+                  Get.to(() => const Schedule());
+                }),
           )),
     );
   }
