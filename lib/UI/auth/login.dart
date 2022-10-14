@@ -1,4 +1,4 @@
-import 'package:acadocen/UI/pages/register.dart';
+import 'package:acadocen/UI/auth/register.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
