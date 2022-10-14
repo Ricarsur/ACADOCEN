@@ -35,7 +35,7 @@ class TexField extends StatelessWidget {
                 contentPadding: EdgeInsets.only(left: 15),
               ),
               style: TextStyle(
-                fontSize: 10,
+                fontSize: 16,
               ),
             ),
           ),
