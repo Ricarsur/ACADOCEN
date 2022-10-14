@@ -18,19 +18,25 @@ class TexField extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.only(top: 10),
-          child: TextField(
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: const Color.fromRGBO(232, 232, 232, 0.6),
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 24.0, horizontal: 10),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(13),
-                borderSide: const BorderSide(),
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      blurRadius: 5,
+                      spreadRadius: 2,
+                      offset: const Offset(0, 3))
+                ]),
+            child: const TextField(
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.only(left: 15),
               ),
-            ),
-            style: const TextStyle(
-              fontSize: 16,
+              style: TextStyle(
+                fontSize: 10,
+              ),
             ),
           ),
         ),
