@@ -27,49 +27,35 @@ class _ScheduleState extends State<Schedule> {
     super.initState();
   }
 
-  Widget topView() {
-    return Container(
-      color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.only(
-            left: 20.0, right: 0.0, top: 25.0, bottom: 0.0),
-        child: Center(
-          child: Wrap(
-            children: <Widget>[
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 2 / 3,
-                child: TextField(
-                  key: const Key('search'),
-                  autofocus: false,
-                  controller: _controller,
-                  decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.all(15.0),
-                    hintText: 'Search',
-                    hintStyle: TextStyle(color: Colors.black38),
-                  ),
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 16.0,
-                  ),
-                ),
-              ),
-              const Icon(
-                Icons.arrow_drop_down,
-                color: Colors.black,
-                size: 26.0,
-              ),
-            ],
-          ),
+  Widget dayView() {
+    return Text(date_utils.DateUtils.formatDay(_selectedDay));
+  }
+
+  Widget titleView() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(89, 60, 0, 20),
+      child: Text(
+        date_utils.DateUtils.months[_selectedDay.month - 1] +
+            ' ' +
+            _selectedDay.year.toString(),
+        style: const TextStyle(
+          color: Color.fromARGB(255, 119, 119, 119),
+          fontSize: 20.0,
+          fontWeight: FontWeight.bold,
         ),
       ),
     );
+  }
+
+  Widget horizontalView() {
+    return Container();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(
-      children: [topView()],
+      children: [dayView(), titleView()],
     ));
   }
 }
