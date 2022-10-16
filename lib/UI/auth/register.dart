@@ -1,9 +1,8 @@
+import 'package:acadocen/UI/widgets/background.dart';
+import 'package:acadocen/UI/widgets/button.dart';
 import 'package:acadocen/UI/widgets/check_box.dart';
 import 'package:acadocen/UI/widgets/textfield.dart';
 import 'package:flutter/material.dart';
-
-import '../widgets/background.dart';
-import '../widgets/button.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -32,38 +31,47 @@ class _RegisterState extends State<Register> {
         ),
         Padding(
             padding: const EdgeInsets.fromLTRB(40, 130, 40, 0),
-            child: ListView(children: const [
-              TexField(
-                text: 'Nombre',
-              ),
-              SizedBox(height: 20),
-              TexField(
-                text: 'Identificación ',
-              ),
-              SizedBox(height: 20),
-              TexField(
-                text: 'Rol',
-              ),
-              SizedBox(height: 20),
-              TexField(
-                text: 'Correo',
-              ),
-              SizedBox(height: 20),
-              TexField(
-                text: 'Contraseña',
-              ),
-              SizedBox(height: 20),
-              TexField(
-                text: 'Confirmar contraseña',
-              ),
-              SizedBox(height: 10),
-              CheckBox(
-                text: 'Aceptar términos y condiciones',
-              ),
-              SizedBox(height: 20),
-              Button(text: 'Registrarse'),
-              SizedBox(height: 30),
-            ])),
+            child: ListView(
+              children: [
+                Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TexField(
+                          text: 'Nombre',
+                        ),
+                        SizedBox(height: 20),
+                        TexField(
+                          text: 'Identificación ',
+                        ),
+                        SizedBox(height: 20),
+                        TexField(
+                          text: 'Rol',
+                        ),
+                        SizedBox(height: 20),
+                        TexField(
+                          text: 'Correo',
+                        ),
+                        SizedBox(height: 20),
+                        TexField(
+                          text: 'Contraseña',
+                        ),
+                        SizedBox(height: 20),
+                        TexField(
+                          text: 'Confirmar contraseña',
+                        ),
+                        SizedBox(height: 10),
+                        CheckBox(
+                          text: 'Aceptar términos y condiciones',
+                        ),
+                        SizedBox(height: 20),
+                        Button(text: 'Registrarse'),
+                        SizedBox(height: 30),
+                      ],
+                    ))
+              ],
+            )),
       ],
     ));
   }
