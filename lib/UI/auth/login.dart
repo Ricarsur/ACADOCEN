@@ -1,5 +1,6 @@
 import 'package:acadocen/UI/auth/register.dart';
 import 'package:acadocen/UI/pages/schedule.dart';
+import 'package:acadocen/UI/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
