@@ -1,61 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class BackgroundColor extends StatelessWidget {
+class BackgroundPage extends StatelessWidget {
   final String title;
-  const BackgroundColor({super.key, required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-              colors: [
-                Color(0xFF1488CC),
-                Color(0xFF2B32B2),
-              ],
-              begin: FractionalOffset(0.0, 0.0),
-              end: FractionalOffset(1.0, 0.0),
-              stops: [0.0, 1.0],
-              tileMode: TileMode.clamp),
-        ),
-        child: Stack(
-          children: [
-            Positioned(
-              top: 35,
-              left: 0,
-              right: 0,
-              child: Center(
-                child: Text(
-                  title,
-                  style: GoogleFonts.poppins().copyWith(
-                    color: Colors.white,
-                    fontSize: 30,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ),
-            ),
-            const BackgroundWhite(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class BackgroundWhite extends StatelessWidget {
-  const BackgroundWhite({super.key});
+  final Widget child;
+  const BackgroundPage({super.key, required this.title, required this.child});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 120),
       decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(50.0), topRight: Radius.circular(50.0))),
+        gradient: LinearGradient(
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+          colors: [
+            Color.fromRGBO(84, 100, 255, 1),
+            Color.fromRGBO(30, 40, 130, 1),
+          ],
+        ),
+      ),
+      child: Stack(children: [
+        Column(
+          children: [
+            const SizedBox(height: 50),
+            Text(title,
+                style: GoogleFonts.poppins(
+                    fontSize: 30,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold)),
+            const SizedBox(height: 50),
+            Container(
+              height: MediaQuery.of(context).size.height - 105,
+              decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(40))),
+              child: Stack(
+                children: [
+                  Positioned(top: 0, left: 0, right: 0, child: child),
+                ],
+              ),
+            )
+          ],
+        ),
+      ]),
     );
   }
 }

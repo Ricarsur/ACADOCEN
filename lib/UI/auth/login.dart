@@ -17,67 +17,59 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          const BackgroundColor(title: 'Acadocen'),
-          Padding(
-              padding: const EdgeInsets.only(top: 140),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(130, 30, 130, 20),
-                    child: Image.asset(
+        body: SingleChildScrollView(
+            child: BackgroundPage(
+                title: 'Acadocen',
+                child: Column(
+                  children: [
+                    SizedBox(height: 20),
+                    Image.asset(
                       'assets/images/logo.png',
                       width: 130,
                     ),
-                  ),
-                  const Text('Bienvenido de vuelta!',
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Color.fromARGB(255, 106, 106, 106),
-                          fontWeight: FontWeight.bold)),
-                  Padding(
-                      padding: const EdgeInsets.fromLTRB(60, 60, 60, 0),
+                    Text('Bienvenido de vuelta!',
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Color.fromARGB(255, 106, 106, 106),
+                            fontWeight: FontWeight.bold)),
+                    SizedBox(height: 40),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: MediaQuery.of(context).size.width * 0.15),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const TexField(text: 'Nombre'),
                           const SizedBox(height: 20),
                           const TexField(text: 'Contraseña'),
-                          const SizedBox(height: 20),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text('¿Aún no tienes cuenta?',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      color: Color.fromARGB(255, 106, 106, 106),
-                                      fontWeight: FontWeight.bold)),
-                              Padding(
-                                  padding: const EdgeInsets.only(left: 5),
-                                  child: InkWell(
-                                    child: const Text(
-                                      'Registrarse',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          color:
-                                              Color.fromRGBO(104, 118, 253, 1),
-                                          decoration: TextDecoration.underline),
-                                    ),
-                                    onTap: () {
-                                      Get.to(() => const Register());
-                                    },
-                                  )),
-                            ],
-                          ),
-                          const SizedBox(height: 20),
-                          const Button(text: 'Iniciar sesión'),
+                          const SizedBox(height: 30),
                         ],
-                      )),
-                ],
-              )),
-        ],
-      ),
-    );
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('¿Aún no tienes cuenta?',
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: Color.fromARGB(255, 90, 90, 90),
+                                fontWeight: FontWeight.w600)),
+                        const SizedBox(width: 5),
+                        InkWell(
+                          child: const Text('Registrarse',
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  color: Color.fromARGB(255, 52, 110, 225),
+                                  fontWeight: FontWeight.w600)),
+                          onTap: () {
+                            Get.to(() => const Register());
+                          },
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 30),
+                    Button(
+                        text: 'Iniciar sesión', width: 200, onPressed: () {}),
+                  ],
+                ))));
   }
 }

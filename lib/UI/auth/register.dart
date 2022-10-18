@@ -1,8 +1,9 @@
-import 'package:acadocen/UI/widgets/background.dart';
 import 'package:acadocen/UI/widgets/button.dart';
-import 'package:acadocen/UI/widgets/check_box.dart';
-import 'package:acadocen/UI/widgets/textfield.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/background.dart';
+import '../widgets/check_box.dart';
+import '../widgets/textfield.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -12,67 +13,76 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  double top = 0;
   @override
   Widget build(BuildContext context) {
+    top = (MediaQuery.of(context).size.height / 18).toDouble();
     return Scaffold(
-        body: Stack(
-      children: [
-        const BackgroundColor(title: 'Acadocen'),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(10, 34, 0, 0),
-          child: IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new_rounded),
-            color: Colors.white,
-            iconSize: 30,
-            onPressed: () {
-              Navigator.pop(context);
-            },
+      body: SingleChildScrollView(
+          child: Stack(children: [
+        BackgroundPage(
+          title: 'Acadocen',
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width * 0.15),
+                child: Column(
+                  children: [
+                    SizedBox(height: 20),
+                    TexField(text: 'Nombre'),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    TexField(text: 'Identificación '),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    TexField(text: 'Correo'),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    TexField(text: 'Contraseña'),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    TexField(text: 'Confirmar contraseña'),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    CheckBox(
+                      text: 'Aceptar términos y condiciones',
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Button(
+                      text: 'Registrarse',
+                      width: 200,
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
-        Padding(
-            padding: const EdgeInsets.fromLTRB(40, 130, 40, 0),
-            child: ListView(
-              children: [
-                Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TexField(
-                          text: 'Nombre',
-                        ),
-                        SizedBox(height: 20),
-                        TexField(
-                          text: 'Identificación ',
-                        ),
-                        SizedBox(height: 20),
-                        TexField(
-                          text: 'Rol',
-                        ),
-                        SizedBox(height: 20),
-                        TexField(
-                          text: 'Correo',
-                        ),
-                        SizedBox(height: 20),
-                        TexField(
-                          text: 'Contraseña',
-                        ),
-                        SizedBox(height: 20),
-                        TexField(
-                          text: 'Confirmar contraseña',
-                        ),
-                        SizedBox(height: 10),
-                        CheckBox(
-                          text: 'Aceptar términos y condiciones',
-                        ),
-                        SizedBox(height: 20),
-                        Button(text: 'Registrarse'),
-                        SizedBox(height: 30),
-                      ],
-                    ))
-              ],
-            )),
-      ],
-    ));
+        Stack(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(top: top, left: 30),
+              child: IconButton(
+                icon: const Icon(Icons.arrow_back_ios_new_rounded),
+                color: Colors.white,
+                iconSize: 30,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            )
+          ],
+        ),
+      ])),
+    );
   }
 }
