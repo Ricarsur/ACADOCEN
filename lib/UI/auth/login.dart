@@ -1,4 +1,5 @@
 import 'package:acadocen/UI/auth/register.dart';
+import 'package:acadocen/UI/pages/schedule.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -68,7 +69,11 @@ class _LoginState extends State<Login> {
                     ),
                     SizedBox(height: 30),
                     Button(
-                        text: 'Iniciar sesión', width: 200, onPressed: () {}),
+                        text: 'Iniciar sesión',
+                        width: 200,
+                        onPressed: () {
+                          Get.to(() => const Schedule());
+                        }),
                   ],
                 ))));
   }

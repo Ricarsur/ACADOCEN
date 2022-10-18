@@ -39,7 +39,7 @@ class Button extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
               onPressed: () {
-                //
+                onPressed();
               }),
         ));
   }
