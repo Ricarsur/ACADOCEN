@@ -325,7 +325,7 @@ packages:
     source: hosted
     version: "2.1.2"
   week_of_year:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: week_of_year
       url: "https://pub.dartlang.org"

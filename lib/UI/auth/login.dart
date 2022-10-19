@@ -1,8 +1,8 @@
 import 'package:acadocen/UI/auth/register.dart';
-import 'package:acadocen/UI/pages/schedule.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../pages/home.dart';
 import '../widgets/background.dart';
 import '../widgets/button.dart';
 import '../widgets/textfield.dart';
@@ -72,7 +72,7 @@ class _LoginState extends State<Login> {
                         text: 'Iniciar sesión',
                         width: 200,
                         onPressed: () {
-                          Get.to(() => const Schedule());
+                          Get.to(() => const Home());
                         }),
                   ],
                 ))));

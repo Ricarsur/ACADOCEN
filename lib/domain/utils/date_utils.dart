@@ -44,6 +44,21 @@ class DateUtils {
     'Diciembre',
   ];
 
+  static const List monthsReduct = [
+    'ENE',
+    'FEB',
+    'MAR',
+    'ABR',
+    'MAY',
+    'JUN',
+    'JUL',
+    'AGO',
+    'SEP',
+    'OCT',
+    'NOV',
+    'DIC',
+  ];
+
   /// The list of days in a given month
   static List<DateTime> daysInMonth(DateTime month) {
     var first = firstDayOfMonth(month);

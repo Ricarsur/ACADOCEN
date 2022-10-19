@@ -1,29 +1,32 @@
-import 'package:acadocen/UI/pages/schedule.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../misc/colors.dart';
-import '../pages/group_list.dart';
 
-class Menu extends StatelessWidget {
+class Menu extends StatefulWidget {
+  final Function currentIndex;
   final Widget body;
-  final String imagen1;
-  final String imagen2;
-  const Menu(
-      {super.key,
-      required this.body,
-      required this.imagen1,
-      required this.imagen2});
+  const Menu({super.key, required this.currentIndex, required this.body});
 
   @override
-  Scaffold build(BuildContext context) {
+  State<Menu> createState() => _MenuState();
+}
+
+class _MenuState extends State<Menu> {
+  String imagen1 = 'assets/svg/iconHome.svg';
+  String imagen2 = 'assets/svg/IconPersons.svg';
+
+  int index = 0;
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-        body: body,
+        body: widget.body,
         extendBody: true,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            print('Hola');
+          },
           child: Container(
             width: 200,
             height: 200,
@@ -57,14 +60,24 @@ class Menu extends StatelessWidget {
                     IconButton(
                       icon: SvgPicture.asset(imagen1),
                       onPressed: () {
-                        Get.to(() => const Schedule());
+                        setState(() {
+                          index = 0;
+                          widget.currentIndex(0);
+                          imagen1 = 'assets/svg/iconHome.svg';
+                          imagen2 = 'assets/svg/IconPersons.svg';
+                        });
                       },
                     ),
                     const Spacer(),
                     IconButton(
                       icon: SvgPicture.asset(imagen2),
                       onPressed: () {
-                        Get.to(() => const GroupList());
+                        setState(() {
+                          index = 1;
+                          widget.currentIndex(1);
+                          imagen1 = 'assets/svg/iconHome2.svg';
+                          imagen2 = 'assets/svg/IconPersons2.svg';
+                        });
                       },
                     ),
                   ],
@@ -75,3 +88,11 @@ class Menu extends StatelessWidget {
         ));
   }
 }
+
+
+/*onTap: (int i) {
+        setState(() {
+          index = i;
+          widget.currentIndex(i);
+        });
+      },*/
