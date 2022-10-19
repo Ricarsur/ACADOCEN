@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../misc/colors.dart';
+
 class Button extends StatelessWidget {
   final String text;
   final double width;
@@ -17,10 +19,10 @@ class Button extends StatelessWidget {
         height: 55,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
               colors: [
-                Color(0xFF1488CC),
-                Color(0xFF2B32B2),
+                ColorsApp.gradiant1,
+                ColorsApp.gradiant2,
               ],
               begin: FractionalOffset(0.0, 0.0),
               end: FractionalOffset(1.0, 0.0),

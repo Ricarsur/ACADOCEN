@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:weekly_date_picker/weekly_date_picker.dart';
 import 'package:acadocen/domain/utils/date_utils.dart' as date_utils;
 
+import '../widgets/nav_bar.dart';
+
 class Schedule extends StatefulWidget {
   const Schedule({super.key});
 
@@ -26,6 +28,9 @@ class _ScheduleState extends State<Schedule> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        body: Menu(
+      imagen1: 'assets/svg/iconHome.svg',
+      imagen2: 'assets/svg/IconPersons.svg',
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(10, 40, 10, 0),
@@ -42,7 +47,7 @@ class _ScheduleState extends State<Schedule> {
                       Text(
                         date_utils.DateUtils.weekdays[_dateNow.weekday - 1],
                         style: const TextStyle(
-                            fontSize: 20,
+                            fontSize: 26,
                             color: Color.fromARGB(255, 106, 106, 106),
                             fontWeight: FontWeight.bold),
                       ),
@@ -80,6 +85,6 @@ class _ScheduleState extends State<Schedule> {
           ),
         ),
       ),
-    );
+    ));
   }
 }

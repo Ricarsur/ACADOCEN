@@ -23,7 +23,7 @@ class DateUtils {
     'Lun',
     'Mar',
     'Mie',
-    'jue',
+    'Jue',
     'Vie',
     'Sab',
     'Dom',

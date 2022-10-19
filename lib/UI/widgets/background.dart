@@ -1,3 +1,4 @@
+import 'package:acadocen/misc/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -9,13 +10,13 @@ class BackgroundPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
           colors: [
-            Color.fromRGBO(84, 100, 255, 1),
-            Color.fromRGBO(30, 40, 130, 1),
+            ColorsApp.gradiant1,
+            ColorsApp.gradiant2,
           ],
         ),
       ),
