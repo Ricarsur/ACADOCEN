@@ -79,6 +79,25 @@ class _ScheduleState extends State<Schedule> {
               selectedBackgroundColor: const Color.fromARGB(255, 71, 71, 198),
               weekdays: const ["Lun", "Mar", "Mie", "Jue", "Vie", "Sáb", "Dom"],
               daysInWeek: 7,
+            ),
+            Column(
+              children: [
+                SizedBox(height: 80),
+                Image.asset(
+                  'assets/images/claritysad.png',
+                  width: 80,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  '¡Aún no tienes ningún horario creado',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  'agregue nuevas tareas para que \nsu día sea productivo',
+                  style: TextStyle(fontSize: 16),
+                  textAlign: TextAlign.center,
+                ),
+              ],
             )
           ],
         ),
