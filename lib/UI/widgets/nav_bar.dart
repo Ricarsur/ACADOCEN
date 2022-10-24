@@ -27,8 +27,8 @@ class _MenuState extends State<Menu> {
         bucket: bucket,
       ),
       floatingActionButton: Container(
-        width: 70,
-        height: 70,
+        width: 55,
+        height: 55,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(40)),
           gradient: LinearGradient(
@@ -51,56 +51,59 @@ class _MenuState extends State<Menu> {
         shape: CircularNotchedRectangle(),
         notchMargin: 10,
         color: Color.fromRGBO(30, 46, 85, 1),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * 0.15),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  MaterialButton(
-                    shape: CircleBorder(),
-                    padding: EdgeInsets.all(24),
-                    minWidth: 40,
-                    onPressed: () {
-                      setState(() {
-                        currentScreen = Schedule();
-                        currentTab = 0;
-                        imagen1 = 'assets/svg/iconHome.svg';
-                        imagen2 = 'assets/svg/IconPersons.svg';
-                      });
-                    },
-                    child: SvgPicture.asset(imagen1),
-                  ),
-                ],
+        child: Container(
+          height: 53,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width / 10),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    MaterialButton(
+                      shape: CircleBorder(),
+                      padding: EdgeInsets.all(16),
+                      minWidth: 40,
+                      onPressed: () {
+                        setState(() {
+                          currentScreen = Schedule();
+                          currentTab = 0;
+                          imagen1 = 'assets/svg/iconHome.svg';
+                          imagen2 = 'assets/svg/IconPersons.svg';
+                        });
+                      },
+                      child: SvgPicture.asset(imagen1, width: 26, height: 26),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                  right: MediaQuery.of(context).size.width * 0.15),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  MaterialButton(
-                    shape: CircleBorder(),
-                    padding: EdgeInsets.all(24),
-                    minWidth: 40,
-                    onPressed: () {
-                      setState(() {
-                        currentScreen = GroupList();
-                        currentTab = 1;
-                        imagen1 = 'assets/svg/iconHome2.svg';
-                        imagen2 = 'assets/svg/IconPersons2.svg';
-                      });
-                    },
-                    child: SvgPicture.asset(imagen2),
-                  ),
-                ],
-              ),
-            )
-          ],
+              Padding(
+                padding: EdgeInsets.only(
+                    right: MediaQuery.of(context).size.width / 10),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    MaterialButton(
+                      shape: CircleBorder(),
+                      padding: EdgeInsets.all(16),
+                      minWidth: 40,
+                      onPressed: () {
+                        setState(() {
+                          currentScreen = GroupList();
+                          currentTab = 1;
+                          imagen1 = 'assets/svg/iconHome2.svg';
+                          imagen2 = 'assets/svg/IconPersons2.svg';
+                        });
+                      },
+                      child: SvgPicture.asset(imagen2, width: 26, height: 26),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

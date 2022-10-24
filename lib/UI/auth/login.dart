@@ -26,11 +26,11 @@ class _LoginState extends State<Login> {
                     SizedBox(height: 20),
                     Image.asset(
                       'assets/images/logo.png',
-                      width: 130,
+                      width: 110,
                     ),
                     Text('Bienvenido de vuelta!',
                         style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 18,
                             color: Color.fromARGB(255, 106, 106, 106),
                             fontWeight: FontWeight.bold)),
                     SizedBox(height: 40),

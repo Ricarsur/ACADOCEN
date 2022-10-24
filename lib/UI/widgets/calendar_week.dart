@@ -200,20 +200,6 @@ class _WeeklyDatePickerState extends State<WeeklyDatePicker> {
                           : widget.weekdayTextColor),
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.all(1.0),
-                decoration: const BoxDecoration(
-                    // Border around today's date
-                    color: Colors.transparent),
-                child: Text(
-                  monthName,
-                  style: TextStyle(
-                      fontSize: 13.0,
-                      color: isSelected
-                          ? widget.selectedDigitColor
-                          : widget.weekdayTextColor),
-                ),
-              ),
             ],
           ),
         ),

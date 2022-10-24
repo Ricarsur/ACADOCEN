@@ -29,9 +29,9 @@ class BackgroundPage extends StatelessWidget {
                     fontSize: 30,
                     color: Colors.white,
                     fontWeight: FontWeight.bold)),
-            const SizedBox(height: 50),
+            const SizedBox(height: 35),
             Container(
-              height: MediaQuery.of(context).size.height - 105,
+              height: MediaQuery.of(context).size.height - 80,
               decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
