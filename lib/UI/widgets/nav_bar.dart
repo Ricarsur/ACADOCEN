@@ -1,12 +1,18 @@
-import 'package:acadocen/UI/pages/group_list.dart';
-import 'package:acadocen/UI/pages/schedule.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
+import 'package:acadocen/UI/pages/group_list.dart';
+import 'package:acadocen/UI/pages/schedule.dart';
 
 import '../../misc/colors.dart';
 
 class Menu extends StatefulWidget {
-  const Menu({super.key});
+  final VoidCallback onPressed;
+  const Menu({
+    Key? key,
+    required this.onPressed,
+  }) : super(key: key);
 
   @override
   State<Menu> createState() => _MenuState();
@@ -43,7 +49,9 @@ class _MenuState extends State<Menu> {
         child: FloatingActionButton(
           backgroundColor: Colors.transparent,
           child: Icon(Icons.add),
-          onPressed: () {},
+          onPressed: () {
+            widget.onPressed();
+          },
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
