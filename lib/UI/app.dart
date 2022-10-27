@@ -1,4 +1,4 @@
-import 'package:acadocen/UI/auth/login.dart';
+import 'package:acadocen/UI/widgets/attendance_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +18,12 @@ class _AppState extends State<App> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Login(),
+      home: const AttendanceList(students: [
+        {
+          'name': 'Juan',
+          'email': 'arafaelaraujo@unicesae.edu.co',
+        },
+      ]),
     );
   }
 }

@@ -35,7 +35,9 @@ class _AttendanceListState extends State<AttendanceList> {
                         value: _attended,
                         onChanged: (value) {
                           setState(() {
-                            _attended = !_attended;
+                            _failed == false
+                                ? _attended = !_attended
+                                : _attended = false;
                           });
                         },
                         activeColor: Colors.green,
@@ -47,7 +49,9 @@ class _AttendanceListState extends State<AttendanceList> {
                         value: _failed,
                         onChanged: (value) {
                           setState(() {
-                            _failed = !_failed;
+                            _attended == false
+                                ? _failed = !_failed
+                                : _failed = false;
                           });
                         },
                         activeColor: Colors.red,
