@@ -39,13 +39,16 @@ class _HomeState extends State<Home> {
             actions: [
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromRGBO(30, 46, 85, 1)),
+                    primary: Colors.red,
+                ),
                 onPressed: () => Navigator.of(context).pop(false),
                 //return false when click on "NO"
                 child: Text('No'),
               ),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                style: ElevatedButton.styleFrom(
+                    primary: Colors.green,
+                ),
                 onPressed: () => Navigator.of(context).pop(true),
                 //return true when click on "Yes"
                 child: Text('Yes'),

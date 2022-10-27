@@ -1,7 +1,6 @@
+import 'package:acadocen/UI/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'auth/login.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
