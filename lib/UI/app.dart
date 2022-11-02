@@ -19,7 +19,8 @@ class _AppState extends State<App> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Login(),
+      // Bugfix
+      home: Login(),
     );
   }
 }
