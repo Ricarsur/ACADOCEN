@@ -1,5 +1,6 @@
 import 'package:acadocen/UI/widgets/background.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../widgets/combo_box.dart';
 
@@ -11,6 +12,8 @@ class NewSchedule extends StatefulWidget {
 }
 
 class _NewScheduleState extends State<NewSchedule> {
+  DateTime now = DateTime.now();
+  late String formattedDate = DateFormat('EEEE, MMM d, yyyy').format(now);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,41 +41,41 @@ class _NewScheduleState extends State<NewSchedule> {
                                   fontWeight: FontWeight.bold),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.grey[200],
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey.withOpacity(0.5),
-                                          blurRadius: 5,
-                                          spreadRadius: 2,
-                                          offset: const Offset(0, 3))
-                                    ]),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 50,
-                                      child: Text(''),
+                                padding: const EdgeInsets.only(top: 10),
+                                child: MaterialButton(
+                                  color: Color.fromRGBO(238, 238, 238, 1),
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(formattedDate.toString(),
+                                            textAlign: TextAlign.left,
+                                            style: const TextStyle(
+                                                fontSize: 14,
+                                                color: Color.fromARGB(
+                                                    212, 95, 95, 95))),
+                                        Center(
+                                            child: Icon(
+                                          Icons.calendar_month_outlined,
+                                          color:
+                                              Color.fromARGB(212, 95, 95, 95),
+                                        ))
+                                      ],
                                     ),
-                                    Spacer(),
-                                    IconButton(
-                                      icon: Icon(Icons.calendar_today),
-                                      tooltip: 'Tap to open date picker',
-                                      onPressed: () {
-                                        showDatePicker(
-                                          context: context,
-                                          initialDate: DateTime.now(),
-                                          firstDate: DateTime(2015, 8),
-                                          lastDate: DateTime(2101),
-                                        );
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
+                                  ),
+                                  minWidth: 400,
+                                  height: 50,
+                                  onPressed: () {
+                                    showDatePicker(
+                                      context: context,
+                                      initialDate: DateTime.now(),
+                                      firstDate: DateTime(2015, 8),
+                                      lastDate: DateTime(2101),
+                                    );
+                                  },
+                                )),
                           ],
                         ),
                         SizedBox(height: 30),

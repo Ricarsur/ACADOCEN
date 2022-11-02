@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../misc/colors.dart';
 import 'auth/login.dart';
 
 class App extends StatefulWidget {
@@ -17,7 +18,10 @@ class _AppState extends State<App> {
       debugShowCheckedModeBanner: false,
       title: 'Acadocen',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        brightness: Brightness.light,
+        colorScheme: ColorScheme.light(primary: ColorsApp.gradiant1),
+        buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+        primaryColor: ColorsApp.gradiant1,
       ),
       // Bugfix
       home: Login(),

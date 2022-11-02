@@ -51,7 +51,10 @@ class _MenuState extends State<Menu> {
         ),
         child: FloatingActionButton(
           backgroundColor: Colors.transparent,
-          child: Icon(Icons.add),
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
           onPressed: () {
             if (currentTab == 0) {
               Get.to(() => const NewSchedule());
