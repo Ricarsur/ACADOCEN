@@ -14,6 +14,7 @@ class _ComboboxState extends State<Combobox> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 600,
       padding: const EdgeInsets.only(left: 13),
       decoration: BoxDecoration(
           color: Colors.grey[200],

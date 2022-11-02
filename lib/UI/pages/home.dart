@@ -1,6 +1,4 @@
-import 'package:acadocen/UI/pages/new_group.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../widgets/nav_bar.dart';
 
@@ -12,18 +10,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int index = 0;
-  Menu? myMenu;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: WillPopScope(
       onWillPop: showExitPopup,
       child: Menu(
-        onPressed: () {
-          Get.to(() => const NewGroup());
-        },
+        onPressed: () {},
       ),
     ));
   }

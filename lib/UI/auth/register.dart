@@ -13,10 +13,8 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  double top = 0;
   @override
   Widget build(BuildContext context) {
-    top = (MediaQuery.of(context).size.height / 18).toDouble();
     return Scaffold(
       body: SingleChildScrollView(
           child: Stack(children: [
@@ -70,7 +68,7 @@ class _RegisterState extends State<Register> {
         Stack(
           children: [
             Padding(
-              padding: EdgeInsets.only(top: top, left: 30),
+              padding: EdgeInsets.only(top: 50, left: 30),
               child: IconButton(
                 icon: const Icon(Icons.arrow_back_ios_new_rounded),
                 color: Colors.white,
