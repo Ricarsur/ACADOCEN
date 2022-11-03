@@ -31,6 +31,8 @@ class Button extends StatelessWidget {
         ),
         child: Center(
           child: MaterialButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)),
               minWidth: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               child: Text(
