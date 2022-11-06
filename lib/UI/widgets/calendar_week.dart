@@ -1,11 +1,9 @@
 library weekly_date_picker;
 
+import 'package:acadocen/UI/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:week_of_year/week_of_year.dart';
-import "package:weekly_date_picker/datetime_apis.dart";
-import 'package:acadocen/domain/utils/date_utils.dart' as date_utils;
 
-import '../../misc/colors.dart';
+import 'package:acadocen/domain/utils/date_utils.dart' as date_utils;
 
 class WeeklyDatePicker extends StatefulWidget {
   const WeeklyDatePicker(

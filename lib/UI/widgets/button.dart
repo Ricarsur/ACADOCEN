@@ -1,6 +1,7 @@
+import 'package:acadocen/UI/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
-import '../../misc/colors.dart';
+
 
 class Button extends StatelessWidget {
   final String text;

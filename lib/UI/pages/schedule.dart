@@ -1,8 +1,6 @@
+import 'package:acadocen/UI/pages/pages.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:acadocen/domain/utils/date_utils.dart' as date_utils;
-
-import '../widgets/calendar_week.dart';
 
 class Schedule extends StatefulWidget {
   const Schedule({super.key});

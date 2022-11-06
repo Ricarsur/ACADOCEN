@@ -1,11 +1,5 @@
-import 'package:acadocen/UI/auth/register.dart';
+import 'package:acadocen/UI/auth/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../pages/home.dart';
-import '../widgets/background.dart';
-import '../widgets/button.dart';
-import '../widgets/textfield.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});

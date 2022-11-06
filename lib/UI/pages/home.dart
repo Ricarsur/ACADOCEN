@@ -1,6 +1,5 @@
+import 'package:acadocen/UI/pages/pages.dart';
 import 'package:flutter/material.dart';
-
-import '../widgets/nav_bar.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -32,7 +31,7 @@ class _HomeState extends State<Home> {
             actions: [
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    primary: Colors.red,
+                  primary: Colors.red,
                 ),
                 onPressed: () => Navigator.of(context).pop(false),
                 //return false when click on "NO"
@@ -40,7 +39,7 @@ class _HomeState extends State<Home> {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    primary: Colors.green,
+                  primary: Colors.green,
                 ),
                 onPressed: () => Navigator.of(context).pop(true),
                 //return true when click on "Yes"

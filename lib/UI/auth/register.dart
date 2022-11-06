@@ -1,9 +1,5 @@
-import 'package:acadocen/UI/widgets/button.dart';
+import 'package:acadocen/UI/auth/auth.dart';
 import 'package:flutter/material.dart';
-
-import '../widgets/background.dart';
-import '../widgets/check_box.dart';
-import '../widgets/textfield.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});

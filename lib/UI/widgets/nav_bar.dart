@@ -1,14 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:acadocen/UI/pages/new_schedule.dart';
-import 'package:acadocen/UI/pages/new_group.dart';
+
+import 'package:acadocen/UI/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-
-import 'package:acadocen/UI/pages/group_list.dart';
-import 'package:acadocen/UI/pages/schedule.dart';
-import 'package:get/get.dart';
-
-import '../../misc/colors.dart';
 
 class Menu extends StatefulWidget {
   final VoidCallback onPressed;

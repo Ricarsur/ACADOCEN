@@ -1,8 +1,8 @@
-import 'package:acadocen/UI/widgets/background.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
-import '../widgets/combo_box.dart';
+import 'package:acadocen/UI/pages/pages.dart';
+import 'package:flutter/material.dart';
+
+
 
 class NewSchedule extends StatefulWidget {
   const NewSchedule({super.key});

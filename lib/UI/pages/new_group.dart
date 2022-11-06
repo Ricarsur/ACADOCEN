@@ -1,7 +1,5 @@
-import 'package:acadocen/UI/widgets/textfield.dart';
+import 'package:acadocen/UI/pages/pages.dart';
 import 'package:flutter/material.dart';
-import '../widgets/background.dart';
-import '../widgets/button.dart';
 
 class NewGroup extends StatefulWidget {
   const NewGroup({super.key});

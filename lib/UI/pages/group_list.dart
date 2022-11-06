@@ -1,7 +1,5 @@
-import 'package:acadocen/models/group.dart';
+import 'package:acadocen/UI/pages/pages.dart';
 import 'package:flutter/material.dart';
-
-import '../../misc/colors.dart';
 
 class GroupList extends StatefulWidget {
   const GroupList({super.key});
