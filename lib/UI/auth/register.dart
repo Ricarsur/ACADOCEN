@@ -1,4 +1,5 @@
 import 'package:acadocen/UI/auth/auth.dart';
+import 'package:acadocen/UI/pages/pages.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
@@ -29,6 +30,13 @@ class _RegisterState extends State<Register> {
                       height: 30,
                     ),
                     TexField(text: 'Identificación '),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Combobox(
+                      title: 'Selecciona tu rol',
+                      list: ['Estudiante', 'Profesor'],
+                    ),
                     SizedBox(
                       height: 30,
                     ),
