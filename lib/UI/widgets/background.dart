@@ -30,17 +30,12 @@ class BackgroundPage extends StatelessWidget {
                     fontWeight: FontWeight.bold)),
             const SizedBox(height: 35),
             Container(
-              height: MediaQuery.of(context).size.height - 80,
               decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(40),
                       topRight: Radius.circular(40))),
-              child: Stack(
-                children: [
-                  Positioned(top: 0, left: 0, right: 0, child: child),
-                ],
-              ),
+              child: child,
             )
           ],
         ),
