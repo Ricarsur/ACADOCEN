@@ -9,7 +9,7 @@ class Group {
 }
 
 List<Group> listGroup = [
-  Group(course: 'Hola', name: 'Nombre'),
-  Group(course: 'Hola', name: 'Nombre'),
-  Group(course: 'Hola', name: 'Nombre')
+  Group(course: 'Base de datos', name: 'grupo 03'),
+  Group(course: 'POOIII', name: 'grupo 02'),
+  Group(course: 'Algebra Lineal', name: 'grupo 01')
 ];

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class TexField extends StatelessWidget {
+  final TextEditingController? controllerText;
   final String text;
   final TextInputType type;
-  const TexField({super.key, required this.text, required this.type});
+  const TexField(
+      {super.key, required this.text, required this.type, this.controllerText});
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,7 @@ class TexField extends StatelessWidget {
                       offset: const Offset(0, 3))
                 ]),
             child: TextField(
+              controller: controllerText,
               keyboardType: type,
               decoration: InputDecoration(
                 border: InputBorder.none,

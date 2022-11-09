@@ -3,6 +3,18 @@ import 'package:flutter/material.dart';
 
 class AppRoutes {
   static String login = '/login';
+
+  static final menuOptions = <MenuOption>[
+    MenuOption(
+      route: login,
+      screen: Login(),
+    ),
+    MenuOption(
+      route: '/home',
+      screen: Home(),
+    )
+  ];
+
   static Map<String, Widget Function(BuildContext)> getRoutes() {
     Map<String, Widget Function(BuildContext)> routes = {};
     for (final i in menuOptions) {
@@ -11,10 +23,8 @@ class AppRoutes {
     return routes;
   }
 
-  static final menuOptions = <MenuOption>[
-    MenuOption(
-      route: login,
-      screen: Login(),
-    )
-  ];
+  static Map<String, Widget Function(BuildContext)> route = {
+    '/login': (BuildContext context) => Login(),
+    '/home': (BuildContext context) => Home(),
+  };
 }

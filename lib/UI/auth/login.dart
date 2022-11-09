@@ -1,4 +1,5 @@
 import 'package:acadocen/UI/auth/auth.dart';
+import 'package:acadocen/domain/services/login_service.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -9,6 +10,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,8 +36,11 @@ class _LoginState extends State<Login> {
                           horizontal: MediaQuery.of(context).size.width * 0.15),
                       child: Column(
                         children: [
-                          const TexField(
-                              text: 'Nombre', type: TextInputType.name),
+                          TexField(
+                            text: 'Nombre de usuario',
+                            type: TextInputType.text,
+                            controllerText: _nameController,
+                          ),
                           const SizedBox(height: 20),
                           passwordField('Contraseña'),
                           const SizedBox(height: 30),
@@ -67,7 +73,8 @@ class _LoginState extends State<Login> {
                         text: 'Iniciar sesión',
                         width: 200,
                         onPressed: () {
-                          Get.to(() => const Home());
+                          ValidationService.validateData(_nameController,
+                              _passwordController, context, '/home');
                         }),
                   ],
                 ))));
@@ -97,7 +104,8 @@ class _LoginState extends State<Login> {
                       spreadRadius: 2,
                       offset: const Offset(0, 3))
                 ]),
-            child: const TextField(
+            child: TextField(
+              controller: _passwordController,
               obscureText: true,
               decoration: InputDecoration(
                 border: InputBorder.none,

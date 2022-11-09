@@ -57,7 +57,7 @@ class _RegisterState extends State<Register> {
                       text: 'Aceptar términos y condiciones',
                     ),
                     SizedBox(
-                      height: 30,
+                      height: 20,
                     ),
                     Button(
                       text: 'Registrarse',
