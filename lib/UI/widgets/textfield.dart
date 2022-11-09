@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class TexField extends StatelessWidget {
   final String text;
-  const TexField({super.key, required this.text});
+  final TextInputType type;
+  const TexField({super.key, required this.text, required this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,8 @@ class TexField extends StatelessWidget {
                       spreadRadius: 2,
                       offset: const Offset(0, 3))
                 ]),
-            child: const TextField(
+            child: TextField(
+              keyboardType: type,
               decoration: InputDecoration(
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(left: 15),

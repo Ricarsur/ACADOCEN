@@ -24,9 +24,9 @@ class _NewGroupState extends State<NewGroup> {
                     vertical: MediaQuery.of(context).size.height / 6),
                 child: Column(
                   children: [
-                    const TexField(text: 'Materia'),
+                    const TexField(text: 'Materia', type: TextInputType.text),
                     const SizedBox(height: 20),
-                    const TexField(text: 'Grupo'),
+                    const TexField(text: 'Grupo', type: TextInputType.text),
                     const SizedBox(height: 30),
                     SizedBox(height: 50),
                     Button(
