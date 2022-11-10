@@ -1,8 +1,5 @@
-
 import 'package:acadocen/UI/pages/pages.dart';
 import 'package:flutter/material.dart';
-
-
 
 class NewSchedule extends StatefulWidget {
   const NewSchedule({super.key});
@@ -96,7 +93,13 @@ class _NewScheduleState extends State<NewSchedule> {
                               ),
                             ),
                           ],
-                        )
+                        ),
+                        SizedBox(height: 40),
+                        Button(
+                          text: 'Crear horario',
+                          onPressed: () {},
+                          width: 200,
+                        ),
                       ],
                     ),
                   ),
