@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "835478374656",
+    "project_id": "acadocen-5419c",
+    "storage_bucket": "acadocen-5419c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:835478374656:android:455401f3ab4ddd05d60be5",
+        "android_client_info": {
+          "package_name": "com.example.app_teacher_planner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "835478374656-0gq3461n9si77qf40b9bqap7jac6hb22.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnECN8qLMrqYbw6Wyh-9fhO34_9lu9l8Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "835478374656-0gq3461n9si77qf40b9bqap7jac6hb22.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
