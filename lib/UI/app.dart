@@ -1,4 +1,5 @@
 import 'package:acadocen/UI/ui.dart';
+import 'package:acadocen/routes/app_routes.dart';
 import 'package:acadocen/themes/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class _AppState extends State<App> {
       title: 'Acadocen',
       theme: ThemeApp.themeLight,
       initialRoute: AppRoutes.login,
-      routes: AppRoutes.getRoutes(),
+      getPages: AppRoutes.all,
     );
   }
 }
