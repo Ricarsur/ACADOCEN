@@ -17,7 +17,7 @@ class _AppState extends State<App> {
       title: 'Acadocen',
       theme: ThemeApp.themeLight,
       initialRoute: AppRoutes.login,
-      getPages: AppRoutes.all,
+      routes: AppRoutes.getRoutes(),
     );
   }
 }

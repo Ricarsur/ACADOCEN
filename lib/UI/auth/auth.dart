@@ -1,6 +1,6 @@
 export 'package:get/get.dart';
 export 'package:acadocen/UI/auth/register.dart';
-export '../pages/home/home.dart';
+export '../pages/home.dart';
 export '../widgets/background.dart';
 export '../widgets/button.dart';
 export '../widgets/textfield.dart';
