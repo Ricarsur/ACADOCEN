@@ -37,7 +37,8 @@ class LoginService {
     }
   }
 
-  verificarUsuario(nameController, passwordController, ruta) async {
+  Future<void> userVerification(
+      nameController, passwordController, ruta) async {
     await firebase
         .collection('usuario')
         .get()
@@ -47,13 +48,22 @@ class LoginService {
             doc['password'] == passwordController.text) {
           Get.offAllNamed(ruta);
         } else {
-          Get.snackbar('Error de Usuario', 'Correo o contraseña incorrectos');
+          Get.snackbar('Error', 'Usuario o contraseña incorrectos');
         }
       });
     });
   }
 
-  static void clear() {
-    nameController.clear();
+  validateDataLogin(nameController, identificacion, rol, correo,
+      passWordController, confirmPasswordController, context, ruta) {
+    if (validateEmpty(nameController, identificacion, rol, correo,
+            passWordController, confirmPasswordController, context, ruta) ==
+        null) {
+      if (validateEmail(correo) == null) {
+        if (validateLengthPassword(passWordController) == null) {
+          userVerification(nameController, passwordController, ruta);
+        }
+      }
+    }
   }
 }

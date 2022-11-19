@@ -74,8 +74,8 @@ class _LoginState extends State<Login> {
                         text: 'Iniciar sesión',
                         width: 200,
                         onPressed: () {
-                          loginService.verificarUsuario(_nameController,
-                              _passwordController, '/home');
+                          loginService.userVerification(
+                              _nameController, _passwordController, '/home');
                         }),
                   ],
                 ))));
