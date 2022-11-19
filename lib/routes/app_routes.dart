@@ -1,3 +1,4 @@
+import 'package:acadocen/UI/pages/pages.dart';
 import 'package:acadocen/UI/ui.dart';
 
 class AppRoutes {
@@ -13,6 +14,10 @@ class AppRoutes {
       GetPage(
         name: '/login',
         page: () => const Login(),
+      ),
+      GetPage(
+        name: '/qr',
+        page: () => const QrStudent(),
       ),
     ];
   }

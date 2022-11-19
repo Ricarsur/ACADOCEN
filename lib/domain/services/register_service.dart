@@ -82,4 +82,19 @@ class RegisterService {
     }
     Get.snackbar('Usuario creado', 'Usuario registrado correctamente');
   }
+
+  Future<void> userVerification(correo) async {
+    await firebase
+        .collection('usuario')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        if (doc['correo'] == correo.text) {
+          Get.snackbar('Error', 'El correo ya existe');
+        } else {
+          Get.snackbar('Error', 'El correo no existe');
+        }
+      });
+    });
+  }
 }

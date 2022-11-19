@@ -1,8 +1,8 @@
 import 'package:acadocen/UI/pages/pages.dart';
 import 'package:flutter/material.dart';
 
-class Qr_student extends StatelessWidget {
-  const Qr_student({super.key});
+class QrStudent extends StatelessWidget {
+  const QrStudent({super.key});
 
   @override
   Widget build(BuildContext context) {

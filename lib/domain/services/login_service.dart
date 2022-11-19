@@ -37,8 +37,7 @@ class LoginService {
     }
   }
 
-  Future<void> userVerification(
-      nameController, passwordController, ruta) async {
+  Future<void> userVerification(nameController, passwordController) async {
     await firebase
         .collection('usuario')
         .get()
@@ -46,7 +45,11 @@ class LoginService {
       querySnapshot.docs.forEach((doc) {
         if (doc['correo'] == nameController.text &&
             doc['password'] == passwordController.text) {
-          Get.offAllNamed(ruta);
+          if (doc['rol'] == 'Profesor') {
+            Get.toNamed('/home');
+          } else {
+            Get.toNamed('/qr');
+          }
         } else {
           Get.snackbar('Error', 'Usuario o contraseña incorrectos');
         }
@@ -61,7 +64,7 @@ class LoginService {
         null) {
       if (validateEmail(correo) == null) {
         if (validateLengthPassword(passWordController) == null) {
-          userVerification(nameController, passwordController, ruta);
+          userVerification(nameController, passwordController);
         }
       }
     }

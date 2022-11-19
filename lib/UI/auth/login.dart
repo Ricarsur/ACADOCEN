@@ -39,7 +39,7 @@ class _LoginState extends State<Login> {
                         children: [
                           TexField(
                             text: 'Correo',
-                            type: TextInputType.text,
+                            type: TextInputType.emailAddress,
                             controllerText: _nameController,
                           ),
                           const SizedBox(height: 20),
@@ -75,7 +75,7 @@ class _LoginState extends State<Login> {
                         width: 200,
                         onPressed: () {
                           loginService.userVerification(
-                              _nameController, _passwordController, '/home');
+                              _nameController, _passwordController);
                         }),
                   ],
                 ))));
