@@ -1,5 +1,6 @@
 import 'package:acadocen/UI/auth/auth.dart';
 import 'package:acadocen/UI/pages/pages.dart';
+import 'package:acadocen/domain/services/register_service.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
@@ -10,6 +11,13 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  RegisterService registerService = RegisterService();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _identificacion = TextEditingController();
+  final TextEditingController _rol = TextEditingController();
+  final TextEditingController _correo = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,23 +33,32 @@ class _RegisterState extends State<Register> {
                 child: Column(
                   children: [
                     SizedBox(height: 20),
-                    TexField(text: 'Nombre', type: TextInputType.text),
+                    TexField(
+                        text: 'Nombre',
+                        type: TextInputType.text,
+                        controllerText: _nameController),
                     SizedBox(
                       height: 30,
                     ),
                     TexField(
-                        text: 'Identificación', type: TextInputType.number),
+                        text: 'Identificación',
+                        type: TextInputType.number,
+                        controllerText: _identificacion),
                     SizedBox(
                       height: 30,
                     ),
                     Combobox(
                       title: 'Selecciona tu rol',
                       list: ['Estudiante', 'Profesor'],
+                      controllerText: _rol,
                     ),
                     SizedBox(
                       height: 30,
                     ),
-                    TexField(text: 'Correo', type: TextInputType.emailAddress),
+                    TexField(
+                        text: 'Correo',
+                        type: TextInputType.emailAddress,
+                        controllerText: _correo),
                     SizedBox(
                       height: 30,
                     ),
@@ -62,7 +79,16 @@ class _RegisterState extends State<Register> {
                     Button(
                       text: 'Registrarse',
                       width: 200,
-                      onPressed: () {},
+                      onPressed: () {
+                        registerService.validateData(
+                            _nameController,
+                            _identificacion,
+                            _rol,
+                            _correo,
+                            _passwordController,
+                            context,
+                            '/home');
+                      },
                     ),
                   ],
                 ),
@@ -113,7 +139,8 @@ class _RegisterState extends State<Register> {
                       spreadRadius: 2,
                       offset: const Offset(0, 3))
                 ]),
-            child: const TextField(
+            child: TextField(
+              controller: _passwordController,
               obscureText: true,
               decoration: InputDecoration(
                 border: InputBorder.none,

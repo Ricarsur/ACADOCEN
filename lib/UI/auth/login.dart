@@ -73,7 +73,7 @@ class _LoginState extends State<Login> {
                         text: 'Iniciar sesión',
                         width: 200,
                         onPressed: () {
-                          ValidationService.validateData(_nameController,
+                          LoginService.validateData(_nameController,
                               _passwordController, context, '/home');
                         }),
                   ],

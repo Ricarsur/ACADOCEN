@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
-String vista = 'Seleccione un rol';
+String vista = 'seleccionar rol';
 
 class Combobox extends StatefulWidget {
+  final TextEditingController? controllerText;
   final List<dynamic> list;
   final String? title;
-  const Combobox({super.key, required this.list, this.title});
+  const Combobox(
+      {super.key, required this.list, this.title, this.controllerText});
 
   @override
   State<Combobox> createState() => _ComboboxState();
@@ -31,16 +33,18 @@ class _ComboboxState extends State<Combobox> {
           width: 600,
           padding: const EdgeInsets.only(left: 13),
           decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(7),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    blurRadius: 5,
-                    spreadRadius: 2,
-                    offset: const Offset(0, 3))
-              ]),
+            color: Colors.grey[200],
+            borderRadius: BorderRadius.circular(7),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  blurRadius: 5,
+                  spreadRadius: 2,
+                  offset: const Offset(0, 3))
+            ],
+          ),
           child: DropdownButton(
+            underline: Container(),
             items: widget.list.map((dynamic value) {
               return DropdownMenuItem(
                 value: value,
@@ -50,6 +54,7 @@ class _ComboboxState extends State<Combobox> {
             onChanged: (dynamic value) => {
               setState(() {
                 vista = value;
+                widget.controllerText!.text = value;
               })
             },
             hint: Text(vista),

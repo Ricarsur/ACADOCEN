@@ -1,14 +1,14 @@
 import 'package:acadocen/domain/services/services.dart';
 import 'package:flutter/cupertino.dart';
 
-class ValidationService {
+class LoginService {
   static TextEditingController nameController = TextEditingController();
   static TextEditingController passwordController = TextEditingController();
 
-  static validateData(nameController,passWordController, context, ruta) {
+  static validateData(nameController, passWordController, context, ruta) {
     if (nameController.text.isEmpty || passWordController.text.isEmpty) {
       Get.snackbar('Error', 'por favor verifique los datos');
-    }else {
+    } else {
       Get.toNamed(ruta);
     }
   }
