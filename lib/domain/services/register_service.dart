@@ -12,31 +12,31 @@ class RegisterService {
         rol.text.isEmpty ||
         correo.text.isEmpty ||
         confirmPasswordController.text.isEmpty) {
-      Get.snackbar('Error', 'por favor verifique los datos');
+      return 'Todos los campos son obligatorios';
     } else {
       return null;
     }
   }
 
-  validatePassword(passWordController, confirmPasswordController, context) {
+  validatePassword(passWordController, confirmPasswordController) {
     if (passWordController.text != confirmPasswordController.text) {
-      Get.snackbar('Error', 'Las contraseñas no coinciden');
+      return 'Las contraseñas no coinciden';
     } else {
       return null;
     }
   }
 
-  validateEmail(correo, context) {
+  validateEmail(correo) {
     if (!GetUtils.isEmail(correo.text)) {
-      Get.snackbar('Error', 'El correo no es valido');
+      return 'El correo no es valido';
     } else {
       return null;
     }
   }
 
-  validateLengthPassword(passWordController, context) {
+  validateLengthPassword(passWordController) {
     if (passWordController.text.length < 6) {
-      Get.snackbar('Error', 'La contraseña debe tener al menos 6 caracteres');
+      return 'La contraseña debe tener al menos 6 caracteres';
     } else {
       return null;
     }
@@ -44,23 +44,28 @@ class RegisterService {
 
   validateDataRegister(nameController, identificacion, rol, correo,
       passWordController, confirmPasswordController, context, ruta) {
+    var mensaje;
+    mensaje = validateEmpty(nameController, identificacion, rol, correo,
+        passWordController, confirmPasswordController, context, ruta);
     if (validateEmpty(nameController, identificacion, rol, correo,
-                passWordController, confirmPasswordController, context, ruta) ==
-            null &&
-        validatePassword(
-                passWordController, confirmPasswordController, context) ==
-            null &&
-        validateEmail(correo, context) == null &&
-        validateLengthPassword(passWordController, context) == null) {
-      registroUsuario(
-          nameController, identificacion, rol, correo, passWordController);
+            passWordController, confirmPasswordController, context, ruta) ==
+        null) {
+      mensaje = validateEmail(correo);
+      if (validateEmail(correo) == null) {
+        mensaje = validateLengthPassword(passWordController);
+        if (validateLengthPassword(passWordController) == null) {
+          mensaje =
+              validatePassword(passWordController, confirmPasswordController);
+          if (validatePassword(passWordController, confirmPasswordController) ==
+              null) {
+            registroUsuario(nameController, identificacion, rol, correo,
+                passWordController);
+          }
+        }
+      }
     }
+    if (mensaje != null) Get.snackbar('Error', mensaje.toString());
   }
-/*else {
-      registroUsuario(
-          nameController, identificacion, rol, correo, passWordController);
-      //Get.toNamed(ruta);
-    } */
 
   registroUsuario(
       nameController, identificacion, rol, correo, passWordController) async {
@@ -75,5 +80,6 @@ class RegisterService {
     } catch (e) {
       print(e.toString());
     }
+    Get.snackbar('Usuario creado', 'Usuario registrado correctamente');
   }
 }

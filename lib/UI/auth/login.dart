@@ -37,7 +37,7 @@ class _LoginState extends State<Login> {
                       child: Column(
                         children: [
                           TexField(
-                            text: 'Nombre de usuario',
+                            text: 'Correo',
                             type: TextInputType.text,
                             controllerText: _nameController,
                           ),

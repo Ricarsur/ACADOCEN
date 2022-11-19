@@ -22,11 +22,15 @@ class _CheckBoxState extends State<CheckBox> {
             });
           },
         ),
-        Text(
-          widget.text,
-          style: const TextStyle(
-            fontSize: 16,
-            color: Color.fromARGB(255, 80, 80, 80),
+        Expanded(
+          child: Text(
+            widget.text,
+            maxLines: 2,
+            overflow: TextOverflow.fade,
+            style: const TextStyle(
+              fontSize: 16,
+              color: Color.fromARGB(255, 80, 80, 80),
+            ),
           ),
         ),
       ],
