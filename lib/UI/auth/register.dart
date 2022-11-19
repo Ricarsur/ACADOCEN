@@ -17,6 +17,8 @@ class _RegisterState extends State<Register> {
   final TextEditingController _rol = TextEditingController();
   final TextEditingController _correo = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -62,11 +64,12 @@ class _RegisterState extends State<Register> {
                     SizedBox(
                       height: 30,
                     ),
-                    passwordField('Contraseña'),
+                    passwordField('Contraseña', _passwordController),
                     SizedBox(
                       height: 30,
                     ),
-                    passwordField('Confirmar contraseña'),
+                    passwordField(
+                        'Confirmar contraseña', _confirmPasswordController),
                     SizedBox(
                       height: 30,
                     ),
@@ -80,12 +83,13 @@ class _RegisterState extends State<Register> {
                       text: 'Registrarse',
                       width: 200,
                       onPressed: () {
-                        registerService.validateData(
+                        registerService.validateDataRegister(
                             _nameController,
                             _identificacion,
                             _rol,
                             _correo,
                             _passwordController,
+                            _confirmPasswordController,
                             context,
                             '/home');
                       },
@@ -115,7 +119,7 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  Widget passwordField(String text) {
+  Widget passwordField(String text, TextEditingController controllerPassword) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -140,7 +144,7 @@ class _RegisterState extends State<Register> {
                       offset: const Offset(0, 3))
                 ]),
             child: TextField(
-              controller: _passwordController,
+              controller: controllerPassword,
               obscureText: true,
               decoration: InputDecoration(
                 border: InputBorder.none,
