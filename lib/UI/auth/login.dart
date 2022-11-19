@@ -10,6 +10,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  LoginService loginService = LoginService();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   @override
@@ -73,8 +74,8 @@ class _LoginState extends State<Login> {
                         text: 'Iniciar sesión',
                         width: 200,
                         onPressed: () {
-                          LoginService.validateData(_nameController,
-                              _passwordController, context, '/home');
+                          loginService.verificarUsuario(_nameController,
+                              _passwordController, '/home');
                         }),
                   ],
                 ))));
