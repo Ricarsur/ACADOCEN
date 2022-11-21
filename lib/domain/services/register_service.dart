@@ -58,7 +58,7 @@ class RegisterService {
               validatePassword(passWordController, confirmPasswordController);
           if (validatePassword(passWordController, confirmPasswordController) ==
               null) {
-            registroUsuario(nameController, identificacion, rol, correo,
+            userVerification(nameController, identificacion, rol, correo,
                 passWordController);
           }
         }
@@ -83,18 +83,26 @@ class RegisterService {
     Get.snackbar('Usuario creado', 'Usuario registrado correctamente');
   }
 
-  Future<void> userVerification(correo) async {
+  Future<void> userVerification(
+      nameController, identificacion, rol, correo, passWordController) async {
+    bool mensaje = false;
     await firebase
         .collection('usuario')
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
-        if (doc['correo'] == correo.text) {
-          Get.snackbar('Error', 'El correo ya existe');
-        } else {
-          Get.snackbar('Error', 'El correo no existe');
+        if (mensaje == false) {
+          if (doc['correo'] == correo.text) {
+            mensaje = true;
+          }
         }
       });
     });
+    if (mensaje == true) {
+      Get.snackbar('Error', 'Este correo ya está siendo usado');
+    } else {
+      registroUsuario(
+          nameController, identificacion, rol, correo, passWordController);
+    }
   }
 }

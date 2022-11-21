@@ -1,4 +1,3 @@
-import 'package:acadocen/UI/auth/auth.dart';
 import 'package:acadocen/UI/pages/pages.dart';
 import 'package:acadocen/domain/services/register_service.dart';
 import 'package:flutter/material.dart';
@@ -72,9 +71,6 @@ class _RegisterState extends State<Register> {
                         'Confirmar contraseña', _confirmPasswordController),
                     SizedBox(
                       height: 30,
-                    ),
-                    CheckBox(
-                      text: 'Aceptar términos y condiciones',
                     ),
                     SizedBox(
                       height: 20,

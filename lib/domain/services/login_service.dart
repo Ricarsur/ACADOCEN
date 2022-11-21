@@ -38,23 +38,29 @@ class LoginService {
   }
 
   Future<void> userVerification(nameController, passwordController) async {
+    bool mensaje = false;
     await firebase
         .collection('usuario')
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
-        if (doc['correo'] == nameController.text &&
-            doc['password'] == passwordController.text) {
-          if (doc['rol'] == 'Profesor') {
-            Get.toNamed('/home');
-          } else {
-            Get.toNamed('/qr');
+        if (mensaje == false) {
+          if (doc['correo'] == nameController.text &&
+              doc['password'] == passwordController.text) {
+            if (doc['rol'] == 'Profesor') {
+              Get.toNamed('/home');
+              mensaje = true;
+            } else {
+              Get.toNamed('/qr');
+              mensaje = true;
+            }
           }
-        } else {
-          Get.snackbar('Error', 'Usuario o contraseña incorrectos');
         }
       });
     });
+    if (mensaje == false) {
+      Get.snackbar('Error', 'Usuario o contraseña incorrectos');
+    }
   }
 
   validateDataLogin(nameController, identificacion, rol, correo,
