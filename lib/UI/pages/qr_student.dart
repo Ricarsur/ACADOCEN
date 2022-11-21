@@ -6,6 +6,7 @@ class QrStudent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final arguments = ModalRoute.of(context)?.settings.arguments;
     return Scaffold(
       body: Center(
         child: SafeArea(
@@ -19,7 +20,7 @@ class QrStudent extends StatelessWidget {
                   )),
               SizedBox(height: 20),
               QrImage(
-                data: 'https://google.com',
+                data: arguments.toString(),
                 version: QrVersions.auto,
                 size: 200.0,
                 foregroundColor: Color.fromARGB(255, 6, 69, 121),
