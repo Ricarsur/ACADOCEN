@@ -51,7 +51,7 @@ class LoginService {
               Get.toNamed('/home');
               mensaje = true;
             } else {
-              Get.toNamed('/qr');
+              Get.toNamed('/qr', arguments: nameController.text);
               mensaje = true;
             }
           }
