@@ -39,6 +39,7 @@ class LoginService {
 
   Future<void> userVerification(nameController, passwordController) async {
     bool mensaje = false;
+    String identificacion = '';
     await firebase
         .collection('usuario')
         .get()
@@ -51,7 +52,8 @@ class LoginService {
               Get.toNamed('/home');
               mensaje = true;
             } else {
-              Get.toNamed('/qr', arguments: nameController.text);
+              identificacion = doc['identificacion'];
+              Get.toNamed('/qr', arguments: identificacion);
               mensaje = true;
             }
           }

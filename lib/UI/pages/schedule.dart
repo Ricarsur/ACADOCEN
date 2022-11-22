@@ -1,6 +1,7 @@
 import 'package:acadocen/UI/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:acadocen/domain/utils/date_utils.dart' as date_utils;
+import 'package:get/get.dart';
 
 class Schedule extends StatefulWidget {
   const Schedule({super.key});
@@ -36,28 +37,40 @@ class _ScheduleState extends State<Schedule> {
               padding: const EdgeInsets.only(left: 20),
               child: Align(
                 alignment: Alignment.topLeft,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
+                child: Row(
                   children: [
-                    Text(
-                      date_utils.DateUtils.weekdays[_dateNow.weekday - 1],
-                      style: const TextStyle(
-                          fontSize: 26,
-                          color: Color.fromARGB(255, 106, 106, 106),
-                          fontWeight: FontWeight.bold),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          date_utils.DateUtils.weekdays[_dateNow.weekday - 1],
+                          style: const TextStyle(
+                              fontSize: 26,
+                              color: Color.fromARGB(255, 106, 106, 106),
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                            date_utils.DateUtils.months[_dateNow.month - 1] +
+                                ' ' +
+                                _dateNow.day.toString() +
+                                ', ' +
+                                _dateNow.year.toString(),
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: Color.fromARGB(255, 106, 106, 106),
+                                fontWeight: FontWeight.w600)),
+                      ],
                     ),
-                    SizedBox(height: 10),
-                    Text(
-                        date_utils.DateUtils.months[_dateNow.month - 1] +
-                            ' ' +
-                            _dateNow.day.toString() +
-                            ', ' +
-                            _dateNow.year.toString(),
-                        style: TextStyle(
-                            fontSize: 14,
-                            color: Color.fromARGB(255, 106, 106, 106),
-                            fontWeight: FontWeight.w600)),
+                    const Spacer(),
+                    InkWell(
+                      onTap: () {
+                        showExitPopup();
+                      },
+                      child: Icon(Icons.exit_to_app,
+                          color: Color.fromARGB(255, 106, 106, 106)),
+                    )
                   ],
                 ),
               ),
@@ -101,5 +114,36 @@ class _ScheduleState extends State<Schedule> {
         ),
       ),
     ));
+  }
+
+  Future<bool> showExitPopup() async {
+    return await showDialog(
+          //show confirm dialogue
+          //the return value will be from "Yes" or "No" options
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('salir de la aplicación'),
+            content: Text('¿Quieres salir de la aplicación?'),
+            actions: [
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                ),
+                onPressed: () => Navigator.of(context).pop(false),
+                //return false when click on "NO"
+                child: Text('No'),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                ),
+                onPressed: () => Get.toNamed('/login'),
+                //return true when click on "Yes"
+                child: Text('Yes'),
+              ),
+            ],
+          ),
+        ) ??
+        false; //if showDialouge had returned null, then return false
   }
 }
