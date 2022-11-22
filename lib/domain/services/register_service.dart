@@ -89,8 +89,8 @@ class RegisterService {
     await firebase
         .collection('usuario')
         .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
+        .then((QuerySnapshot querySnapshot) async {
+      querySnapshot.docs.forEach(await (doc) {
         if (mensaje == false) {
           if (doc['correo'] == correo.text) {
             mensaje = true;
@@ -101,7 +101,7 @@ class RegisterService {
     if (mensaje == true) {
       Get.snackbar('Error', 'Este correo ya está siendo usado');
     } else {
-      registroUsuario(
+      await registroUsuario(
           nameController, identificacion, rol, correo, passWordController);
     }
   }

@@ -43,8 +43,8 @@ class LoginService {
     await firebase
         .collection('usuario')
         .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
+        .then((QuerySnapshot querySnapshot) async {
+      querySnapshot.docs.forEach(await (doc) {
         if (mensaje == false) {
           if (doc['correo'] == nameController.text &&
               doc['password'] == passwordController.text) {
@@ -66,13 +66,13 @@ class LoginService {
   }
 
   validateDataLogin(nameController, identificacion, rol, correo,
-      passWordController, confirmPasswordController, context, ruta) {
+      passWordController, confirmPasswordController, context, ruta) async {
     if (validateEmpty(nameController, identificacion, rol, correo,
             passWordController, confirmPasswordController, context, ruta) ==
         null) {
       if (validateEmail(correo) == null) {
         if (validateLengthPassword(passWordController) == null) {
-          userVerification(nameController, passwordController);
+          await userVerification(nameController, passwordController);
         }
       }
     }

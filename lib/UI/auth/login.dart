@@ -73,8 +73,8 @@ class _LoginState extends State<Login> {
                     Button(
                         text: 'Iniciar sesión',
                         width: 200,
-                        onPressed: () {
-                          loginService.userVerification(
+                        onPressed: () async {
+                          await loginService.userVerification(
                               _nameController, _passwordController);
                         }),
                   ],
