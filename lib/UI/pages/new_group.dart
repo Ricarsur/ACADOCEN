@@ -1,5 +1,9 @@
 import 'package:acadocen/UI/pages/pages.dart';
+import 'package:acadocen/UI/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+
+import '../auth/login.dart';
+import '../widgets/list_group.dart';
 
 class NewGroup extends StatefulWidget {
   const NewGroup({super.key});
@@ -31,7 +35,9 @@ class _NewGroupState extends State<NewGroup> {
                     SizedBox(height: 50),
                     Button(
                       text: 'Crear grupo',
-                      onPressed: () {},
+                      onPressed: () {
+                      
+                      },
                       width: 200,
                     ),
                   ],
