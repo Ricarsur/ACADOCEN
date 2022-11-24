@@ -1,8 +1,10 @@
+import 'package:acadocen/UI/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class CheckBox extends StatefulWidget {
-  final String text;
-  const CheckBox({super.key, required this.text});
+  const CheckBox({
+    super.key,
+  });
 
   @override
   State<CheckBox> createState() => _CheckBoxState();
@@ -15,23 +17,13 @@ class _CheckBoxState extends State<CheckBox> {
     return Row(
       children: [
         Checkbox(
+          activeColor: ColorsApp.gradiant1,
           value: _value,
           onChanged: (value) {
             setState(() {
-              _value = !_value;
+              _value = value!;
             });
           },
-        ),
-        Expanded(
-          child: Text(
-            widget.text,
-            maxLines: 2,
-            overflow: TextOverflow.fade,
-            style: const TextStyle(
-              fontSize: 16,
-              color: Color.fromARGB(255, 80, 80, 80),
-            ),
-          ),
         ),
       ],
     );

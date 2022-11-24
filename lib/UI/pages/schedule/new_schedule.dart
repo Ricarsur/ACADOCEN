@@ -90,6 +90,7 @@ class _NewScheduleState extends State<NewSchedule> {
                               padding: const EdgeInsets.only(top: 10),
                               child: Combobox(
                                 list: ['Grupo 01', 'Grupo 02'],
+                                hintText: 'Seleccione un grupo',
                               ),
                             ),
                           ],

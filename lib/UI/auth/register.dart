@@ -52,6 +52,7 @@ class _RegisterState extends State<Register> {
                     Combobox(
                       title: 'Selecciona tu rol',
                       list: ['Estudiante', 'Profesor'],
+                      hintText: 'Seleccione el rol',
                       controllerText: _rol,
                     ),
                     SizedBox(

@@ -3,6 +3,9 @@
 import 'package:acadocen/UI/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
+import '../pages/course/course_list.dart';
+import '../pages/course/new_course.dart';
+
 class Menu extends StatefulWidget {
   final VoidCallback onPressed;
   const Menu({
@@ -52,7 +55,7 @@ class _MenuState extends State<Menu> {
             if (currentTab == 0) {
               Get.to(() => const NewSchedule());
             } else {
-              Get.to(() => const NewGroup());
+              Get.to(() => const NewCourse());
             }
             widget.onPressed();
           },
@@ -103,7 +106,7 @@ class _MenuState extends State<Menu> {
                       minWidth: 40,
                       onPressed: () {
                         setState(() {
-                          currentScreen = GroupList();
+                          currentScreen = CourseList();
                           currentTab = 1;
                           imagen1 = 'assets/svg/iconHome2.svg';
                           imagen2 = 'assets/svg/IconPersons2.svg';

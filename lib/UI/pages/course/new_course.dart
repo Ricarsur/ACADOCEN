@@ -1,19 +1,14 @@
 import 'package:acadocen/UI/pages/pages.dart';
-import 'package:acadocen/domain/services/user/data_profile.dart';
 import 'package:flutter/material.dart';
 
-class NewGroup extends StatefulWidget {
-  const NewGroup({super.key});
+class NewCourse extends StatefulWidget {
+  const NewCourse({super.key});
 
   @override
-  State<NewGroup> createState() => _NewGroupState();
+  State<NewCourse> createState() => _NewCourseState();
 }
 
-class _NewGroupState extends State<NewGroup> {
-  final TextEditingController _nameCourse = TextEditingController();
-  final TextEditingController _nameGroup = TextEditingController();
-  DataProfile dataProfile = DataProfile();
-
+class _NewCourseState extends State<NewCourse> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +16,7 @@ class _NewGroupState extends State<NewGroup> {
             child: Stack(
       children: [
         BackgroundPage(
-            title: 'Nuevo grupo',
+            title: 'Nueva materia',
             child: Column(children: [
               Padding(
                 padding: EdgeInsets.symmetric(
@@ -30,21 +25,12 @@ class _NewGroupState extends State<NewGroup> {
                 child: Column(
                   children: [
                     TexField(
-                        text: 'Materia',
-                        type: TextInputType.text,
-                        controllerText: _nameCourse),
-                    const SizedBox(height: 20),
-                    TexField(
-                        text: 'Grupo',
-                        type: TextInputType.text,
-                        controllerText: _nameGroup),
+                        text: 'Nombre de la materia', type: TextInputType.text),
                     const SizedBox(height: 30),
                     SizedBox(height: 50),
                     Button(
-                      text: 'Crear grupo',
-                      onPressed: () {
-                        dataProfile.createGroup(_nameCourse.text);
-                      },
+                      text: 'Crear materia',
+                      onPressed: () {},
                       width: 200,
                     ),
                   ],
