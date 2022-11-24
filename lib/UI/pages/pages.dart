@@ -7,5 +7,5 @@ export 'package:acadocen/UI/widgets/textfield.dart';
 export 'package:acadocen/UI/widgets/background.dart';
 export '../widgets/combo_box.dart';
 export '../widgets/calendar_week.dart';
-export 'package:acadocen/UI/pages/qr_student.dart';
+export 'package:acadocen/UI/pages/qr/qr_student.dart';
 export 'package:qr_flutter/qr_flutter.dart';

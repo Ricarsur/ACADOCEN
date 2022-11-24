@@ -1,4 +1,5 @@
 import 'package:acadocen/domain/services/services.dart';
+import 'package:acadocen/models/usuario.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,23 +24,7 @@ class LoginService {
     }
   }
 
-  validateEmail(correo) {
-    if (!GetUtils.isEmail(correo.text)) {
-      return 'El correo no es valido';
-    } else {
-      return null;
-    }
-  }
-
-  validateLengthPassword(passWordController) {
-    if (passWordController.text.length < 6) {
-      return 'La contraseña debe tener al menos 6 caracteres';
-    } else {
-      return null;
-    }
-  }
-
-  Future<void> userVerification(nameController, passwordController) async {
+  Future<void> userVerification(Usuario usuario) async {
     bool mensaje = false;
     String identificacion = '';
     await firebase
@@ -48,8 +33,8 @@ class LoginService {
         .then((QuerySnapshot querySnapshot) async {
       querySnapshot.docs.forEach(await (doc) {
         if (mensaje == false) {
-          if (doc['correo'] == nameController.text &&
-              doc['password'] == passwordController.text) {
+          if (doc['correo'] == usuario.correo &&
+              doc['password'] == usuario.password) {
             if (doc['rol'] == 'Profesor') {
               Get.toNamed('/home');
               mensaje = true;
@@ -67,7 +52,7 @@ class LoginService {
     }
   }
 
-  validateDataLogin(nameController, identificacion, rol, correo,
+  /*validateDataLogin(nameController, identificacion, rol, correo,
       passWordController, confirmPasswordController, context, ruta) async {
     if (validateEmpty(nameController, identificacion, rol, correo,
             passWordController, confirmPasswordController, context, ruta) ==
@@ -78,21 +63,25 @@ class LoginService {
         }
       }
     }
-  }
+  }*/
 
-  Future<void> authVerfication(
-    correo,
-    passWordController,
-  ) async {
+  Future<void> userVerfication(Usuario usuario) async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance
+      final UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(
-              email: correo.text, password: passWordController.text);
+              email: usuario.correo, password: usuario.password);
+      if (userCredential.user != null) {
+        userVerification(usuario);
+      }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        Get.snackbar('Error', 'Usuario no encontrado');
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+        Get.snackbar('Error', 'Contraseña incorrecta');
+      } else if (e.code == 'invalid-email') {
+        Get.snackbar('Error', 'Correo invalido');
+      } else if (e.code == 'weak-password') {
+        Get.snackbar('Error', 'La contraseña debe tener al menos 6 caracteres');
       }
     }
   }

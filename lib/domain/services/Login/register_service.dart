@@ -1,4 +1,5 @@
 import 'package:acadocen/domain/services/services.dart';
+import 'package:acadocen/models/usuario.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -6,29 +7,27 @@ class RegisterService {
   final FirebaseFirestore firebase = FirebaseFirestore.instance;
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-  validateEmpty(nameController, identificacion, rol, correo, passWordController,
-      confirmPasswordController, context, ruta) {
-    if (nameController.text.isEmpty ||
-        passWordController.text.isEmpty ||
-        identificacion.text.isEmpty ||
-        rol.text.isEmpty ||
-        correo.text.isEmpty ||
-        confirmPasswordController.text.isEmpty) {
+  validateEmpty(Usuario usuario) {
+    if (usuario.nombre.isEmpty ||
+        usuario.identificacion.isEmpty ||
+        usuario.rol.isEmpty ||
+        usuario.correo.isEmpty ||
+        usuario.password.isEmpty ||
+        usuario.confirmPassword.isEmpty) {
       return 'Todos los campos son obligatorios';
     } else {
       return null;
     }
   }
 
-  registroUsuario(
-      nameController, identificacion, rol, correo, passWordController) async {
+  registroUsuario(Usuario usuario) async {
     try {
       await firebase.collection('usuario').doc().set({
-        'nombre': nameController.text,
-        'identificacion': identificacion.text,
-        'rol': rol.text,
-        'correo': correo.text,
-        'password': passWordController.text,
+        'correo': usuario.correo,
+        'identificacion': usuario.identificacion,
+        'nombre': usuario.nombre,
+        'password': usuario.password,
+        'rol': usuario.rol,
       });
     } catch (e) {
       print(e.toString());
@@ -36,8 +35,7 @@ class RegisterService {
     Get.snackbar('Usuario creado', 'Usuario registrado correctamente');
   }
 
-  Future<void> userVerification(
-      nameController, identificacion, rol, correo, passWordController) async {
+  Future<void> userVerification(Usuario usuario) async {
     bool mensaje = false;
     await firebase
         .collection('usuario')
@@ -45,7 +43,7 @@ class RegisterService {
         .then((QuerySnapshot querySnapshot) async {
       querySnapshot.docs.forEach(await (doc) {
         if (mensaje == false) {
-          if (doc['correo'] == correo.text) {
+          if (doc['correo'] == usuario.correo) {
             mensaje = true;
           }
         }
@@ -54,19 +52,16 @@ class RegisterService {
     if (mensaje == true) {
       Get.snackbar('Error', 'Este correo ya está siendo usado');
     } else {
-      await registroUsuario(
-          nameController, identificacion, rol, correo, passWordController);
+      await registroUsuario(usuario);
     }
   }
 
-  Future<void> authVerfication(nameController, identificacion, rol, correo,
-      passWordController, confirmPasswordController, context, ruta) async {
+  Future<void> authVerfication(Usuario user) async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance
+      UserCredential userCredentia = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
-              email: correo.text, password: passWordController.text);
-      userVerification(
-          nameController, identificacion, rol, correo, passWordController);
+              email: user.correo, password: user.password);
+      userVerification(user);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         Get.snackbar('Error', 'No user found for that email.');

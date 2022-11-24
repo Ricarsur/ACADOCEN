@@ -1,5 +1,6 @@
 import 'package:acadocen/UI/pages/pages.dart';
-import 'package:acadocen/domain/services/register_service.dart';
+import 'package:acadocen/domain/services/Login/register_service.dart';
+import 'package:acadocen/models/usuario.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
@@ -80,14 +81,14 @@ class _RegisterState extends State<Register> {
                       width: 200,
                       onPressed: () async {
                         await registerService.authVerfication(
-                            _nameController,
-                            _identificacion,
-                            _rol,
-                            _correo,
-                            _passwordController,
-                            _confirmPasswordController,
-                            context,
-                            '/home');
+                          Usuario(
+                            nombre: _nameController.text,
+                            identificacion: _identificacion.text,
+                            rol: _rol.text,
+                            correo: _correo.text,
+                            password: _passwordController.text,
+                          ),
+                        );
                       },
                     ),
                   ],

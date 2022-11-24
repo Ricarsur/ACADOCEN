@@ -1,5 +1,6 @@
 import 'package:acadocen/UI/auth/auth.dart';
-import 'package:acadocen/domain/services/login_service.dart';
+import 'package:acadocen/domain/services/Login/login_service.dart';
+import 'package:acadocen/models/usuario.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -75,7 +76,10 @@ class _LoginState extends State<Login> {
                         width: 200,
                         onPressed: () async {
                           await loginService.userVerification(
-                              _nameController, _passwordController);
+                            Usuario(
+                                correo: _nameController.text,
+                                password: _passwordController.text),
+                          );
                         }),
                   ],
                 ))));
