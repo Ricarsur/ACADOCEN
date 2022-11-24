@@ -1,11 +1,13 @@
 import 'package:acadocen/domain/services/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginService {
   static TextEditingController nameController = TextEditingController();
   static TextEditingController passwordController = TextEditingController();
   final FirebaseFirestore firebase = FirebaseFirestore.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
 
   validateEmpty(nameController, identificacion, rol, correo, passWordController,
       confirmPasswordController, context, ruta) {
@@ -74,6 +76,23 @@ class LoginService {
         if (validateLengthPassword(passWordController) == null) {
           await userVerification(nameController, passwordController);
         }
+      }
+    }
+  }
+
+  Future<void> authVerfication(
+    correo,
+    passWordController,
+  ) async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: correo.text, password: passWordController.text);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
       }
     }
   }

@@ -1,8 +1,10 @@
 import 'package:acadocen/domain/services/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RegisterService {
   final FirebaseFirestore firebase = FirebaseFirestore.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
 
   validateEmpty(nameController, identificacion, rol, correo, passWordController,
       confirmPasswordController, context, ruta) {
@@ -16,55 +18,6 @@ class RegisterService {
     } else {
       return null;
     }
-  }
-
-  validatePassword(passWordController, confirmPasswordController) {
-    if (passWordController.text != confirmPasswordController.text) {
-      return 'Las contraseñas no coinciden';
-    } else {
-      return null;
-    }
-  }
-
-  validateEmail(correo) {
-    if (!GetUtils.isEmail(correo.text)) {
-      return 'El correo no es valido';
-    } else {
-      return null;
-    }
-  }
-
-  validateLengthPassword(passWordController) {
-    if (passWordController.text.length < 6) {
-      return 'La contraseña debe tener al menos 6 caracteres';
-    } else {
-      return null;
-    }
-  }
-
-  validateDataRegister(nameController, identificacion, rol, correo,
-      passWordController, confirmPasswordController, context, ruta) {
-    var mensaje;
-    mensaje = validateEmpty(nameController, identificacion, rol, correo,
-        passWordController, confirmPasswordController, context, ruta);
-    if (validateEmpty(nameController, identificacion, rol, correo,
-            passWordController, confirmPasswordController, context, ruta) ==
-        null) {
-      mensaje = validateEmail(correo);
-      if (validateEmail(correo) == null) {
-        mensaje = validateLengthPassword(passWordController);
-        if (validateLengthPassword(passWordController) == null) {
-          mensaje =
-              validatePassword(passWordController, confirmPasswordController);
-          if (validatePassword(passWordController, confirmPasswordController) ==
-              null) {
-            userVerification(nameController, identificacion, rol, correo,
-                passWordController);
-          }
-        }
-      }
-    }
-    if (mensaje != null) Get.snackbar('Error', mensaje.toString());
   }
 
   registroUsuario(
@@ -103,6 +56,37 @@ class RegisterService {
     } else {
       await registroUsuario(
           nameController, identificacion, rol, correo, passWordController);
+    }
+  }
+
+  Future<void> authVerfication(nameController, identificacion, rol, correo,
+      passWordController, confirmPasswordController, context, ruta) async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: correo.text, password: passWordController.text);
+      userVerification(
+          nameController, identificacion, rol, correo, passWordController);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        Get.snackbar('Error', 'No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        Get.snackbar('Error', 'No user found for that email.');
+      } else if (e.code == 'email-already-in-use') {
+        Get.snackbar('Error', 'Este correo ya está siendo usado');
+      } else if (e.code == 'invalid-email') {
+        Get.snackbar('Error', 'El correo no es valido');
+      } else if (e.code == 'weak-password') {
+        Get.snackbar('Error', 'La contraseña debe tener al menos 6 caracteres');
+      } else if (e.code == 'operation-not-allowed') {
+        Get.snackbar('Error', 'El correo no es valido');
+      } else if (e.code == 'invalid-credential') {
+        Get.snackbar('Error', 'El correo no es valido');
+      } else if (e.code == 'invalid-verification-code') {
+        Get.snackbar('Error', 'El correo no es valido');
+      } else if (e.code == 'invalid-verification-id') {
+        Get.snackbar('Error', 'El correo no es valido');
+      }
     }
   }
 }

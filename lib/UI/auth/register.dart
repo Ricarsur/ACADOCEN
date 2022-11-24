@@ -78,8 +78,8 @@ class _RegisterState extends State<Register> {
                     Button(
                       text: 'Registrarse',
                       width: 200,
-                      onPressed: () {
-                        registerService.validateDataRegister(
+                      onPressed: () async {
+                        await registerService.authVerfication(
                             _nameController,
                             _identificacion,
                             _rol,
