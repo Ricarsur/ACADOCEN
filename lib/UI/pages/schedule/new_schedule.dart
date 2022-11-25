@@ -10,12 +10,12 @@ class NewSchedule extends StatefulWidget {
 
 class _NewScheduleState extends State<NewSchedule> {
   DateTime now = DateTime.now();
-  TimeOfDay time = TimeOfDay.now();
+  TimeOfDay timeInitial = TimeOfDay.now();
+  TimeOfDay timeFinal = TimeOfDay.now();
   late String formattedDate = DateFormat('EEEE, MMM d, yyyy').format(now);
 
   final TextEditingController _materia = TextEditingController();
   final TextEditingController _grupos = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,7 +103,7 @@ class _NewScheduleState extends State<NewSchedule> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text('${time.format(context)}',
+                                        Text('${timeInitial.format(context)}',
                                             textAlign: TextAlign.left,
                                             style: const TextStyle(
                                                 fontSize: 14,
@@ -126,7 +126,7 @@ class _NewScheduleState extends State<NewSchedule> {
                                             context: context,
                                             initialTime: TimeOfDay.now());
                                     if (pickedTime == null) return;
-                                    setState(() => time = pickedTime);
+                                    setState(() => timeInitial = pickedTime);
                                   },
                                 )),
                             SizedBox(height: 30),
@@ -147,7 +147,7 @@ class _NewScheduleState extends State<NewSchedule> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text('${time.format(context)}',
+                                        Text('${timeFinal.format(context)}',
                                             textAlign: TextAlign.left,
                                             style: const TextStyle(
                                                 fontSize: 14,
@@ -170,7 +170,7 @@ class _NewScheduleState extends State<NewSchedule> {
                                             context: context,
                                             initialTime: TimeOfDay.now());
                                     if (pickedTime == null) return;
-                                    setState(() => time = pickedTime);
+                                    setState(() => timeFinal = pickedTime);
                                   },
                                 )),
                           ],

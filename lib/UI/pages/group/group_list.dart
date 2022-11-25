@@ -1,3 +1,4 @@
+import 'package:acadocen/UI/pages/course/new_group.dart';
 import 'package:acadocen/UI/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,31 @@ class _GroupListState extends State<GroupList> {
   Widget build(BuildContext context) {
     var _query = MediaQuery.of(context).size;
     return Scaffold(
+      floatingActionButton: Container(
+        width: 55,
+        height: 55,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(40)),
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [
+              ColorsApp.gradiant1,
+              ColorsApp.gradiant2,
+            ],
+          ),
+        ),
+        child: FloatingActionButton(
+          backgroundColor: Colors.transparent,
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Get.to(() => NewGroup());
+          },
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 23),
@@ -47,7 +73,7 @@ class _GroupListState extends State<GroupList> {
                 onPressed: () {
                   Get.to(() => const StudentList());
                 },
-              )
+              ),
             ]),
           )),
         ),

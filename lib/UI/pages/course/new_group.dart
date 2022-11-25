@@ -4,17 +4,12 @@ import 'package:acadocen/domain/services/Materia/materia.dart';
 import 'package:acadocen/domain/services/user/data_profile.dart';
 import 'package:flutter/material.dart';
 
-class NewCourse extends StatefulWidget {
-  const NewCourse({super.key});
-
-  @override
-  State<NewCourse> createState() => _NewCourseState();
-}
-
-class _NewCourseState extends State<NewCourse> {
+class NewGroup extends StatelessWidget {
   DataCourse dataCourse = DataCourse();
+
   DataProfile dataProfile = DataProfile();
-  final TextEditingController _nameCourse = TextEditingController();
+
+  final TextEditingController _numberGroup = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +18,7 @@ class _NewCourseState extends State<NewCourse> {
             child: Stack(
       children: [
         BackgroundPage(
-            title: 'Nueva materia',
+            title: 'Nuevo grupo',
             child: Column(children: [
               Padding(
                 padding: EdgeInsets.symmetric(
@@ -32,18 +27,16 @@ class _NewCourseState extends State<NewCourse> {
                 child: Column(
                   children: [
                     TexField(
-                        text: 'Nombre de la materia',
+                        text: 'Nombre del grupo',
                         type: TextInputType.text,
-                        controllerText: _nameCourse),
+                        controllerText: _numberGroup),
                     const SizedBox(height: 30),
                     SizedBox(height: 50),
                     Button(
-                      text: 'Crear materia',
+                      text: 'Crear grupo',
                       onPressed: () async {
-                        await dataProfile.createMateria(
-                          NombreMateria(
-                            nombreCourse: _nameCourse.text,
-                          ),
+                        await dataProfile.createGroupMateria(
+                          NumberMateria(numberGoup: _numberGroup.text),
                         );
                       },
                       width: 200,

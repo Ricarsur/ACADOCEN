@@ -1,11 +1,11 @@
 import 'package:acadocen/UI/pages/qr/scanQr.dart';
+import 'package:acadocen/UI/pages/students/new_student.dart';
 import 'package:acadocen/UI/widgets/assistance_student.dart';
+import 'package:acadocen/UI/widgets/button.dart';
 import 'package:acadocen/UI/widgets/widgets.dart';
 import 'package:acadocen/domain/utils/date_utils.dart' as date_utils;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
-import '../../widgets/button.dart';
 
 class StudentList extends StatefulWidget {
   const StudentList({super.key});
@@ -33,6 +33,42 @@ class _StudentListState extends State<StudentList> {
   Widget build(BuildContext context) {
     var _query = MediaQuery.of(context).size;
     return Scaffold(
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Button(
+            text: 'Enviar asistencia',
+            onPressed: () {},
+            width: 200,
+          ),
+          SizedBox(width: 14),
+          Container(
+            width: 55,
+            height: 55,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(40)),
+              gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [
+                  ColorsApp.gradiant1,
+                  ColorsApp.gradiant2,
+                ],
+              ),
+            ),
+            child: FloatingActionButton(
+              backgroundColor: Colors.transparent,
+              child: Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Get.to(() => NewStudent());
+              },
+            ),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 23),
@@ -97,40 +133,6 @@ class _StudentListState extends State<StudentList> {
               ),
               SizedBox(height: 10),
               AssistanceStudent(nameStudent: 'David Ravelo Bonett'),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Button(
-                    text: 'Enviar asistencia',
-                    onPressed: () {},
-                    width: 200,
-                  ),
-                  SizedBox(width: 14),
-                  Container(
-                    width: 55,
-                    height: 55,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(40)),
-                      gradient: LinearGradient(
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                        colors: [
-                          ColorsApp.gradiant1,
-                          ColorsApp.gradiant2,
-                        ],
-                      ),
-                    ),
-                    child: FloatingActionButton(
-                      backgroundColor: Colors.transparent,
-                      child: Icon(
-                        Icons.add,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {},
-                    ),
-                  ),
-                ],
-              )
             ]),
           )),
         ),
