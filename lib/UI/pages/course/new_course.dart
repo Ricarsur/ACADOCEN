@@ -1,4 +1,5 @@
 import 'package:acadocen/UI/pages/pages.dart';
+import 'package:acadocen/domain/services/Materia/consul_materia.dart';
 import 'package:acadocen/domain/services/Materia/materia.dart';
 import 'package:acadocen/domain/services/user/data_profile.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +12,10 @@ class NewCourse extends StatefulWidget {
 }
 
 class _NewCourseState extends State<NewCourse> {
+  DataCourse dataCourse = DataCourse();
   DataProfile dataProfile = DataProfile();
   final TextEditingController _nameCourse = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
