@@ -20,7 +20,7 @@ class RegisterService {
     }
   }
 
-  registroUsuario(Usuario usuario) async {
+  /*registroUsuario(Usuario usuario) async {
     try {
       await firebase.collection('usuario').doc().set({
         'correo': usuario.correo,
@@ -33,9 +33,9 @@ class RegisterService {
       print(e.toString());
     }
     Get.snackbar('Usuario creado', 'Usuario registrado correctamente');
-  }
+  }*/
 
-  Future<void> userVerification(Usuario usuario) async {
+  /*Future<void> userVerification(Usuario usuario) async {
     bool mensaje = false;
     await firebase
         .collection('usuario')
@@ -54,14 +54,20 @@ class RegisterService {
     } else {
       await registroUsuario(usuario);
     }
-  }
+  }*/
 
   Future<void> authVerfication(Usuario user) async {
     try {
       UserCredential userCredentia = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
               email: user.correo, password: user.password);
-      userVerification(user);
+      await firebase.collection('usuario').doc(userCredentia.user!.uid).set({
+        'correo': user.correo,
+        'identificacion': user.identificacion,
+        'nombre': user.nombre,
+        'password': user.password,
+        'rol': user.rol,
+      });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         Get.snackbar('Error', 'No user found for that email.');

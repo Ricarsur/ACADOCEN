@@ -1,4 +1,6 @@
 import 'package:acadocen/UI/pages/pages.dart';
+import 'package:acadocen/domain/services/Materia/materia.dart';
+import 'package:acadocen/domain/services/user/data_profile.dart';
 import 'package:flutter/material.dart';
 
 class NewCourse extends StatefulWidget {
@@ -9,6 +11,8 @@ class NewCourse extends StatefulWidget {
 }
 
 class _NewCourseState extends State<NewCourse> {
+  DataProfile dataProfile = DataProfile();
+  final TextEditingController _nameCourse = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,12 +29,21 @@ class _NewCourseState extends State<NewCourse> {
                 child: Column(
                   children: [
                     TexField(
-                        text: 'Nombre de la materia', type: TextInputType.text),
+                        text: 'Nombre de la materia',
+                        type: TextInputType.text,
+                        controllerText: _nameCourse),
                     const SizedBox(height: 30),
                     SizedBox(height: 50),
                     Button(
                       text: 'Crear materia',
-                      onPressed: () {},
+                      onPressed: () async {
+                        await dataProfile.guardarMateria(
+                          Materia(
+                            nombreCourse: _nameCourse.text,
+                            numberGoup: '1',
+                          ),
+                        );
+                      },
                       width: 200,
                     ),
                   ],

@@ -1,9 +1,8 @@
+import 'package:acadocen/domain/services/Materia/materia.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class DataProfile {
-  var name;
-  DataProfile({this.name});
   //final FirebaseAuth ? user = FirebaseAuth.instance;
   final FirebaseAuth auth = FirebaseAuth.instance;
   List<dynamic> dataID = [];
@@ -78,5 +77,19 @@ class DataProfile {
         .add({'nombre': nameGroup})
         .then((value) => print('Group Added'))
         .catchError((error) => print('Failed to add group: $error'));
+  }
+
+  Future guardarMateria(Materia materia) async {
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+    await FirebaseFirestore.instance
+        .collection('usuario')
+        .doc(user.uid)
+        .collection('grupos')
+        .doc(materia.numberGoup)
+        .collection('materias')
+        .add({'nombre': materia.nombreCourse})
+        .then((value) => print('Materia Added'))
+        .catchError((error) => print('Failed to add materia: $error'));
   }
 }
