@@ -11,6 +11,9 @@ class NewSchedule extends StatefulWidget {
 class _NewScheduleState extends State<NewSchedule> {
   DateTime now = DateTime.now();
   late String formattedDate = DateFormat('EEEE, MMM d, yyyy').format(now);
+  late String formattedTime = DateFormat('kk:mm').format(now);
+  final TextEditingController _materia = TextEditingController();
+  final TextEditingController _grupos = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,6 +83,74 @@ class _NewScheduleState extends State<NewSchedule> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
+                              'Seleccionar hora',
+                              style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Color.fromARGB(255, 80, 80, 80),
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: MaterialButton(
+                                  color: Color.fromRGBO(238, 238, 238, 1),
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('8:00 am - 9:00 am',
+                                            textAlign: TextAlign.left,
+                                            style: const TextStyle(
+                                                fontSize: 14,
+                                                color: Color.fromARGB(
+                                                    212, 95, 95, 95))),
+                                        Center(
+                                            child: Icon(
+                                          Icons.access_time_outlined,
+                                          color:
+                                              Color.fromARGB(212, 95, 95, 95),
+                                        ))
+                                      ],
+                                    ),
+                                  ),
+                                  minWidth: 400,
+                                  height: 50,
+                                  onPressed: () {
+                                    showTimePicker(
+                                      context: context,
+                                      initialTime: TimeOfDay.now(),
+                                    );
+                                  },
+                                )),
+                          ],
+                        ),
+                        SizedBox(height: 30),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Seleccionar materia',
+                              style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Color.fromARGB(255, 80, 80, 80),
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 0),
+                              child: Combobox(
+                                hintText: "Seleccionar materia",
+                                list: ['Matematicas', 'Biologia'],
+                                controllerText: _materia,
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(height: 30),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
                               'Seleccionar un grupo',
                               style: const TextStyle(
                                   fontSize: 16,
@@ -87,10 +158,11 @@ class _NewScheduleState extends State<NewSchedule> {
                                   fontWeight: FontWeight.bold),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(top: 10),
+                              padding: const EdgeInsets.only(top: 0),
                               child: Combobox(
+                                hintText: 'Seleccionar un grupo',
                                 list: ['Grupo 01', 'Grupo 02'],
-                                hintText: 'Seleccione un grupo',
+                                controllerText: _grupos,
                               ),
                             ),
                           ],
