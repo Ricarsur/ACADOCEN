@@ -1,3 +1,4 @@
+import 'package:acadocen/UI/pages/qr/scanQr.dart';
 import 'package:acadocen/UI/widgets/assistance_student.dart';
 import 'package:acadocen/UI/widgets/widgets.dart';
 import 'package:acadocen/domain/utils/date_utils.dart' as date_utils;
@@ -65,7 +66,9 @@ class _StudentListState extends State<StudentList> {
                   ),
                   Spacer(),
                   InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(() => const ScanQr());
+                      },
                       child:
                           Image.asset('assets/images/scaner.png', height: 20))
                 ],

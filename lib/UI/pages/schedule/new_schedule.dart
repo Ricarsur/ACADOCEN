@@ -10,10 +10,12 @@ class NewSchedule extends StatefulWidget {
 
 class _NewScheduleState extends State<NewSchedule> {
   DateTime now = DateTime.now();
+  TimeOfDay time = TimeOfDay.now();
   late String formattedDate = DateFormat('EEEE, MMM d, yyyy').format(now);
-  late String formattedTime = DateFormat('kk:mm').format(now);
+
   final TextEditingController _materia = TextEditingController();
   final TextEditingController _grupos = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +52,8 @@ class _NewScheduleState extends State<NewSchedule> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(formattedDate.toString(),
+                                        Text(
+                                            '${now.day}/${now.month}/${now.year}',
                                             textAlign: TextAlign.left,
                                             style: const TextStyle(
                                                 fontSize: 14,
@@ -67,13 +70,14 @@ class _NewScheduleState extends State<NewSchedule> {
                                   ),
                                   minWidth: 400,
                                   height: 50,
-                                  onPressed: () {
-                                    showDatePicker(
-                                      context: context,
-                                      initialDate: DateTime.now(),
-                                      firstDate: DateTime(2015, 8),
-                                      lastDate: DateTime(2101),
-                                    );
+                                  onPressed: () async {
+                                    DateTime? picked = await showDatePicker(
+                                        context: context,
+                                        initialDate: now,
+                                        firstDate: DateTime(2015, 8),
+                                        lastDate: DateTime(2101));
+                                    if (picked == null) return;
+                                    setState(() => now = picked);
                                   },
                                 )),
                           ],
@@ -83,7 +87,7 @@ class _NewScheduleState extends State<NewSchedule> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Seleccionar hora',
+                              'Seleccionar hora inicial',
                               style: const TextStyle(
                                   fontSize: 16,
                                   color: Color.fromARGB(255, 80, 80, 80),
@@ -99,7 +103,7 @@ class _NewScheduleState extends State<NewSchedule> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text('8:00 am - 9:00 am',
+                                        Text('${time.format(context)}',
                                             textAlign: TextAlign.left,
                                             style: const TextStyle(
                                                 fontSize: 14,
@@ -116,11 +120,57 @@ class _NewScheduleState extends State<NewSchedule> {
                                   ),
                                   minWidth: 400,
                                   height: 50,
-                                  onPressed: () {
-                                    showTimePicker(
-                                      context: context,
-                                      initialTime: TimeOfDay.now(),
-                                    );
+                                  onPressed: () async {
+                                    TimeOfDay? pickedTime =
+                                        await showTimePicker(
+                                            context: context,
+                                            initialTime: TimeOfDay.now());
+                                    if (pickedTime == null) return;
+                                    setState(() => time = pickedTime);
+                                  },
+                                )),
+                            SizedBox(height: 30),
+                            Text(
+                              'Seleccionar hora final',
+                              style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Color.fromARGB(255, 80, 80, 80),
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: MaterialButton(
+                                  color: Color.fromRGBO(238, 238, 238, 1),
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('${time.format(context)}',
+                                            textAlign: TextAlign.left,
+                                            style: const TextStyle(
+                                                fontSize: 14,
+                                                color: Color.fromARGB(
+                                                    212, 95, 95, 95))),
+                                        Center(
+                                            child: Icon(
+                                          Icons.access_time_outlined,
+                                          color:
+                                              Color.fromARGB(212, 95, 95, 95),
+                                        ))
+                                      ],
+                                    ),
+                                  ),
+                                  minWidth: 400,
+                                  height: 50,
+                                  onPressed: () async {
+                                    TimeOfDay? pickedTime =
+                                        await showTimePicker(
+                                            context: context,
+                                            initialTime: TimeOfDay.now());
+                                    if (pickedTime == null) return;
+                                    setState(() => time = pickedTime);
                                   },
                                 )),
                           ],
