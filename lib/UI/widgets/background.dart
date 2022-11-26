@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 
 class BackgroundPage extends StatelessWidget {
   final String title;
+  final double fontSize;
   final Widget child;
-  const BackgroundPage({super.key, required this.title, required this.child});
+  const BackgroundPage(
+      {super.key,
+      required this.title,
+      required this.child,
+      required this.fontSize});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +30,7 @@ class BackgroundPage extends StatelessWidget {
             const SizedBox(height: 50),
             Text(title,
                 style: GoogleFonts.poppins(
-                    fontSize: 30,
+                    fontSize: fontSize,
                     color: Colors.white,
                     fontWeight: FontWeight.bold)),
             const SizedBox(height: 35),

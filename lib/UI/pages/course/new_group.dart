@@ -18,6 +18,7 @@ class NewGroup extends StatelessWidget {
             child: Stack(
       children: [
         BackgroundPage(
+            fontSize: 30,
             title: 'Nuevo grupo',
             child: Column(children: [
               Padding(

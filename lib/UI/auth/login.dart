@@ -19,6 +19,7 @@ class _LoginState extends State<Login> {
     return Scaffold(
         body: SingleChildScrollView(
             child: BackgroundPage(
+                fontSize: 30,
                 title: 'Acadocen',
                 child: Column(
                   children: [

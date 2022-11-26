@@ -20,6 +20,7 @@ class NewStudent extends StatelessWidget {
             child: Stack(
       children: [
         BackgroundPage(
+            fontSize: 25,
             title: 'Nuevo estudiante',
             child: Column(children: [
               Padding(

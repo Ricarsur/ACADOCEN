@@ -26,6 +26,7 @@ class _RegisterState extends State<Register> {
       body: SingleChildScrollView(
           child: Stack(children: [
         BackgroundPage(
+          fontSize: 30,
           title: 'Acadocen',
           child: Column(
             children: [
@@ -88,6 +89,7 @@ class _RegisterState extends State<Register> {
                             rol: _rol.text,
                             correo: _correo.text,
                             password: _passwordController.text,
+                            confirmPassword: _confirmPasswordController.text,
                           ),
                         );
                       },

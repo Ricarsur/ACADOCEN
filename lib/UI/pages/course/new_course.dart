@@ -23,6 +23,7 @@ class _NewCourseState extends State<NewCourse> {
             child: Stack(
       children: [
         BackgroundPage(
+            fontSize: 30,
             title: 'Nueva materia',
             child: Column(children: [
               Padding(

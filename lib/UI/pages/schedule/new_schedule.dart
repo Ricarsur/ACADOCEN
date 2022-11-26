@@ -25,6 +25,7 @@ class _NewScheduleState extends State<NewSchedule> {
             Stack(
               children: [
                 BackgroundPage(
+                  fontSize: 30,
                   title: 'Nuevo horario',
                   child: Padding(
                     padding: EdgeInsets.symmetric(
