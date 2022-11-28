@@ -30,7 +30,7 @@ class _NewScheduleState extends State<NewSchedule> {
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: MediaQuery.of(context).size.width * 0.15,
-                        vertical: MediaQuery.of(context).size.height / 6),
+                        vertical: 20),
                     child: Column(
                       children: [
                         Column(

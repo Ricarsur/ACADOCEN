@@ -3,6 +3,7 @@ import 'package:acadocen/domain/services/Materia/consul_materia.dart';
 import 'package:acadocen/domain/services/Materia/materia.dart';
 import 'package:acadocen/domain/services/user/data_profile.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class NewCourse extends StatefulWidget {
   const NewCourse({super.key});
@@ -62,7 +63,7 @@ class _NewCourseState extends State<NewCourse> {
                 color: Colors.white,
                 iconSize: 30,
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.pop(Get.context!);
                 },
               ),
             )

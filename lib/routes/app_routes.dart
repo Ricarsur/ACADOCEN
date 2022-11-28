@@ -10,7 +10,7 @@ class AppRoutes {
     return [
       GetPage(
         name: '/home',
-        page: () => const Home(),
+        page: () => const Home(currentTab: 0),
       ),
       GetPage(
         name: '/login',

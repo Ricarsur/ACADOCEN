@@ -19,9 +19,9 @@ class DataProfile {
         .doc(user.uid)
         .collection('materias')
         .doc(materia.nombreCourse)
-        .set({'nombre': materia.nombreCourse})
-        .then((value) => print('Group Added'))
-        .catchError(
+        .set({'nombre': materia.nombreCourse}).then((value) {
+      print('Group Added');
+    }).catchError(
             (error) => Get.snackbar('Error', 'Failed to add group: $error'));
   }
 
@@ -119,5 +119,37 @@ class DataProfile {
       });
     });
     return dataID;
+  }
+
+  deleteMateria(String materia) async {
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+    await FirebaseFirestore.instance
+        .collection('usuario')
+        .doc(user.uid)
+        .collection('materias')
+        .doc(materia)
+        .delete()
+        .then((value) {
+      Get.snackbar('Materia', 'Materia Eliminada');
+    }).catchError((error) =>
+            Get.snackbar('Error', 'Failed to delete materia: $error'));
+  }
+
+  deleteGroup(String course, String group) async {
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+    await FirebaseFirestore.instance
+        .collection('usuario')
+        .doc(user.uid)
+        .collection('materias')
+        .doc(course)
+        .collection('grupos')
+        .doc(group)
+        .delete()
+        .then((value) {
+      Get.snackbar('Grupo', 'Grupo Eliminado');
+    }).catchError(
+            (error) => Get.snackbar('Error', 'Failed to delete grupo: $error'));
   }
 }

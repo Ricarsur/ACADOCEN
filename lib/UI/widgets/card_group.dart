@@ -1,50 +1,88 @@
-import 'package:acadocen/UI/widgets/widgets.dart';
+import 'package:acadocen/UI/ui.dart';
 import 'package:flutter/material.dart';
 
-class CardGroup extends StatelessWidget {
-  final String name;
-  final VoidCallback onPressed;
+import '../../domain/services/user/data_profile.dart';
 
-  const CardGroup({super.key, required this.name, required this.onPressed});
+class CardGroup extends StatelessWidget {
+  final String couser;
+  final String group;
+  final VoidCallback onPressed;
+  const CardGroup(
+      {super.key,
+      required this.group,
+      required this.onPressed,
+      required this.couser});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: InkWell(
-        onTap: onPressed,
-        child: Column(children: [
-          Container(
-            margin: EdgeInsets.all(20),
-            padding: EdgeInsets.all(10),
+    return Material(
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 10),
+        child: InkWell(
+          onTap: onPressed,
+          onLongPress: () {
+            _eliminarmateria(context, couser, group);
+          },
+          child: Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-                ColorsApp.gradiant1,
-                ColorsApp.gradiant2,
-              ]),
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 5,
-                  blurRadius: 7,
-                  offset: const Offset(0, 3), // changes position of shadow
-                ),
-              ],
+              borderRadius: BorderRadius.circular(13),
+              gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [
+                  ColorsApp.gradiant1,
+                  ColorsApp.gradiant2,
+                ],
+              ),
             ),
-            child: ListTile(
-              leading: const Icon(Icons.group_outlined, color: Colors.white),
-              title: Text(name,
-                  style: const TextStyle(fontSize: 20, color: Colors.white)),
-              trailing: IconButton(
-                icon: const Icon(Icons.arrow_forward_ios, color: Colors.white),
-                onPressed: () {
-                  onPressed();
-                },
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 17.0, vertical: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(group,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w800)),
+                  Image.asset('assets/images/arrow.png', width: 20)
+                ],
               ),
             ),
           ),
-        ]),
+        ),
       ),
     );
+  }
+
+  _eliminarmateria(context, String course, String grupo) {
+    DataProfile dataProfile = DataProfile();
+    showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+              title: const Text('Eliminar Grupo'),
+              content: Text('Realmente desea eliminar ${grupo}'),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      dataProfile.deleteGroup(course, grupo);
+                      Navigator.pop(context);
+                      build(context);
+                    },
+                    child: const Text(
+                      'Eliminar',
+                      style: TextStyle(color: Colors.red),
+                    )),
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text(
+                      'Cancelar',
+                      style: TextStyle(color: Colors.blue),
+                    ))
+              ],
+            ));
   }
 }

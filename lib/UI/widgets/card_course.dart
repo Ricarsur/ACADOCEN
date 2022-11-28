@@ -1,6 +1,7 @@
+import 'package:acadocen/UI/ui.dart';
 import 'package:flutter/material.dart';
 
-import '../../misc/colors.dart';
+import '../../domain/services/user/data_profile.dart';
 
 class CardCourse extends StatelessWidget {
   final String name;
@@ -14,6 +15,9 @@ class CardCourse extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 10),
         child: InkWell(
           onTap: onPressed,
+          onLongPress: () {
+            _eliminarmateria(context, name);
+          },
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(13),
@@ -45,5 +49,34 @@ class CardCourse extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _eliminarmateria(context, String materia) {
+    DataProfile dataProfile = DataProfile();
+    showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+              title: const Text('Eliminar Materia'),
+              content: Text('Realmente desea eliminar ${materia}'),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      dataProfile.deleteMateria(materia);
+                      Navigator.pop(context);
+                    },
+                    child: const Text(
+                      'Eliminar',
+                      style: TextStyle(color: Colors.red),
+                    )),
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text(
+                      'Cancelar',
+                      style: TextStyle(color: Colors.blue),
+                    ))
+              ],
+            ));
   }
 }

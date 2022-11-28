@@ -7,18 +7,23 @@ import '../pages/course/course_list.dart';
 import '../pages/course/new_course.dart';
 
 class Menu extends StatefulWidget {
+  final int? pagina;
   final VoidCallback onPressed;
-  const Menu({
-    Key? key,
-    required this.onPressed,
-  }) : super(key: key);
+  const Menu({Key? key, required this.onPressed, this.pagina})
+      : super(key: key);
 
   @override
   State<Menu> createState() => _MenuState();
 }
 
 class _MenuState extends State<Menu> {
-  int currentTab = 0;
+  int? currentTab;
+  @override
+  void initState() {
+    super.initState();
+    currentTab = widget.pagina;
+  }
+
   final List<Widget> screens = [
     Schedule(),
     GroupList(

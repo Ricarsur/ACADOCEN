@@ -1,11 +1,9 @@
-import 'package:acadocen/UI/pages/course/course_list.dart';
 import 'package:acadocen/UI/pages/course/new_group.dart';
 import 'package:acadocen/UI/pages/students/students_list.dart';
+import 'package:acadocen/UI/widgets/card_group.dart';
 import 'package:acadocen/UI/widgets/widgets.dart';
 import 'package:acadocen/domain/services/user/data_profile.dart';
 import 'package:flutter/material.dart';
-
-import '../../widgets/card_course.dart';
 
 class GroupList extends StatefulWidget {
   final String idCourse;
@@ -63,12 +61,12 @@ class _GroupListState extends State<GroupList> {
                       color: Color.fromRGBO(84, 100, 255, 1),
                       iconSize: 30,
                       onPressed: () {
-                        Get.to(() => CourseList());
+                        Navigator.pop(Get.context!);
                       },
                     ),
                   ),
                   SizedBox(width: 20),
-                  Text('Listado de cursos',
+                  Text('Listado de grupos',
                       style: TextStyle(fontSize: 22, color: ColorsApp.title)
                           .copyWith(fontWeight: FontWeight.bold)),
                 ],
@@ -83,8 +81,9 @@ class _GroupListState extends State<GroupList> {
                           physics: NeverScrollableScrollPhysics(),
                           itemCount: dataProfile.dataID.length,
                           itemBuilder: (context, index) {
-                            return CardCourse(
-                              name: dataProfile.dataID[index].numberGoup
+                            return CardGroup(
+                              couser: widget.idCourse,
+                              group: dataProfile.dataID[index].numberGoup
                                   .toString(),
                               onPressed: () {
                                 Get.to(() => StudentList());
