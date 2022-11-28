@@ -65,7 +65,7 @@ class LoginService {
     }
   }*/
 
-  Future<void> userVerfication(Usuario usuario) async {
+  Future<void> authVerfication(Usuario usuario) async {
     try {
       final UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(

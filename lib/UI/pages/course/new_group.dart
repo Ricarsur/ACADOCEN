@@ -4,7 +4,16 @@ import 'package:acadocen/domain/services/Materia/materia.dart';
 import 'package:acadocen/domain/services/user/data_profile.dart';
 import 'package:flutter/material.dart';
 
-class NewGroup extends StatelessWidget {
+import '../group/group_list.dart';
+
+class NewGroup extends StatefulWidget {
+  final String idCourse;
+  const NewGroup({super.key, required this.idCourse});
+  @override
+  State<NewGroup> createState() => _NewGroupState();
+}
+
+class _NewGroupState extends State<NewGroup> {
   DataCourse dataCourse = DataCourse();
 
   DataProfile dataProfile = DataProfile();
@@ -28,7 +37,7 @@ class NewGroup extends StatelessWidget {
                 child: Column(
                   children: [
                     TexField(
-                        text: 'Nombre del grupo',
+                        text: 'Número de grupo',
                         type: TextInputType.text,
                         controllerText: _numberGroup),
                     const SizedBox(height: 30),
@@ -37,8 +46,11 @@ class NewGroup extends StatelessWidget {
                       text: 'Crear grupo',
                       onPressed: () async {
                         await dataProfile.createGroupMateria(
-                          NumberMateria(numberGoup: _numberGroup.text),
+                          Materia(
+                              numberGoup: _numberGroup.text,
+                              uid: widget.idCourse.toString()),
                         );
+                        await dataProfile.getMateria();
                       },
                       width: 200,
                     ),
@@ -55,7 +67,14 @@ class NewGroup extends StatelessWidget {
                 color: Colors.white,
                 iconSize: 30,
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => GroupList(
+                        idCourse: widget.idCourse,
+                      ),
+                    ),
+                  );
                 },
               ),
             )

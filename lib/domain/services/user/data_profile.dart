@@ -1,34 +1,43 @@
+import 'package:acadocen/domain/controller/control_user.dart';
 import 'package:acadocen/domain/services/Materia/materia.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
 
 class DataProfile {
   //final FirebaseAuth ? user = FirebaseAuth.instance;
   final FirebaseAuth auth = FirebaseAuth.instance;
-  List<dynamic> dataID = [];
+  List<Materia> dataID = [];
+  ControlUser controlUser = ControlUser();
 
-  Future createMateria(NombreMateria materia) async {
+  Future createMateria(Materia materia) async {
     final User? user = auth.currentUser;
     final uid = user!.uid;
+
     await FirebaseFirestore.instance
         .collection('usuario')
         .doc(user.uid)
         .collection('materias')
-        .add({'nombre': materia.nombreCourse})
+        .doc(materia.nombreCourse)
+        .set({'nombre': materia.nombreCourse})
         .then((value) => print('Group Added'))
-        .catchError((error) => print('Failed to add group: $error'));
+        .catchError(
+            (error) => Get.snackbar('Error', 'Failed to add group: $error'));
   }
 
-  Future createGroupMateria(NumberMateria numberMateria) async {
+  Future createGroupMateria(Materia materia) async {
     final User? user = auth.currentUser;
     final uid = user!.uid;
     await FirebaseFirestore.instance
         .collection('usuario')
         .doc(user.uid)
         .collection('materias')
-        .add({'nombre': numberMateria.numberGoup})
-        .then((value) => print('Group Added'))
-        .catchError((error) => print('Failed to add group: $error'));
+        .doc(materia.uid)
+        .collection('grupos')
+        .add({'nombre': materia.numberGoup})
+        .then((value) => Get.snackbar('Good', 'Group Added'))
+        .catchError(
+            (error) => Get.snackbar('Error', 'Failed to add group: $error'));
   }
 
   /*Future guardarMateria(Materia materia) async {
@@ -45,4 +54,70 @@ class DataProfile {
         .catchError(
             (error) => Get.snackbar('Error', 'Failed to add materia: $error'));
   }*/
+  Future<dynamic> getMateria() async {
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+    dataID.clear();
+    await FirebaseFirestore.instance
+        .collection('usuario')
+        .doc(user.uid)
+        .collection('materias')
+        .orderBy('nombre')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        dataID.add(Materia(nombreCourse: doc['nombre']));
+        print(doc.id);
+      });
+    });
+    return dataID;
+  }
+
+  Future verifyMateria(Materia materia) async {
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+    bool verify = false;
+    await FirebaseFirestore.instance
+        .collection('usuario')
+        .doc(user.uid)
+        .collection('materias')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        if (verify == false) {
+          if (doc['nombre'] == materia.nombreCourse) {
+            verify = true;
+            print('Ya existe una materia con ese nombre');
+          }
+        }
+      });
+      if (verify == false) {
+        createMateria(materia);
+        Get.snackbar('Good', 'Materia Added');
+      } else {
+        Get.snackbar('Error', 'Ya existe una materia con ese nombre');
+      }
+    });
+  }
+
+  Future<dynamic> getGroup(String materia) async {
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+    dataID.clear();
+    await FirebaseFirestore.instance
+        .collection('usuario')
+        .doc(user.uid)
+        .collection('materias')
+        .doc(materia)
+        .collection('grupos')
+        .orderBy('nombre')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        dataID.add(Materia(numberGoup: doc['nombre']));
+        print(doc.id);
+      });
+    });
+    return dataID;
+  }
 }

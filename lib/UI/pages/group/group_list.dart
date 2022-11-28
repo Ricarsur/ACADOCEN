@@ -1,18 +1,22 @@
+import 'package:acadocen/UI/pages/course/course_list.dart';
 import 'package:acadocen/UI/pages/course/new_group.dart';
+import 'package:acadocen/UI/pages/students/students_list.dart';
 import 'package:acadocen/UI/widgets/widgets.dart';
+import 'package:acadocen/domain/services/user/data_profile.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/card_course.dart';
-import '../students/students_list.dart';
 
 class GroupList extends StatefulWidget {
-  const GroupList({super.key});
+  final String idCourse;
+  const GroupList({super.key, required this.idCourse});
 
   @override
   State<GroupList> createState() => _GroupListState();
 }
 
 class _GroupListState extends State<GroupList> {
+  DataProfile dataProfile = DataProfile();
   @override
   Widget build(BuildContext context) {
     var _query = MediaQuery.of(context).size;
@@ -38,7 +42,9 @@ class _GroupListState extends State<GroupList> {
             color: Colors.white,
           ),
           onPressed: () {
-            Get.to(() => NewGroup());
+            Get.to(() => NewGroup(
+                  idCourse: widget.idCourse,
+                ));
           },
         ),
       ),
@@ -57,23 +63,38 @@ class _GroupListState extends State<GroupList> {
                       color: Color.fromRGBO(84, 100, 255, 1),
                       iconSize: 30,
                       onPressed: () {
-                        Navigator.pop(context);
+                        Get.to(() => CourseList());
                       },
                     ),
                   ),
                   SizedBox(width: 20),
-                  Text('Listado de materias',
+                  Text('Listado de cursos',
                       style: TextStyle(fontSize: 22, color: ColorsApp.title)
                           .copyWith(fontWeight: FontWeight.bold)),
                 ],
               ),
               SizedBox(height: 20),
-              CardCourse(
-                name: 'Grupo 01',
-                onPressed: () {
-                  Get.to(() => const StudentList());
-                },
-              ),
+              FutureBuilder(
+                  future: dataProfile.getGroup(widget.idCourse),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: dataProfile.dataID.length,
+                          itemBuilder: (context, index) {
+                            return CardCourse(
+                              name: dataProfile.dataID[index].numberGoup
+                                  .toString(),
+                              onPressed: () {
+                                Get.to(() => StudentList());
+                              },
+                            );
+                          });
+                    } else {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                  })
             ]),
           )),
         ),

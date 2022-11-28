@@ -44,7 +44,7 @@ class NewStudent extends StatelessWidget {
                       text: 'Registrar',
                       onPressed: () async {
                         await dataProfile.createMateria(
-                          NombreMateria(
+                          Materia(
                             nombreCourse: _nombreEstudent.text,
                           ),
                         );

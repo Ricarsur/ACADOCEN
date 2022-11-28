@@ -1,9 +1,10 @@
-class NombreMateria {
-  final String nombreCourse;
-  NombreMateria({required this.nombreCourse});
+class Materia {
+  final String? nombreCourse;
+  final String? numberGoup;
+  final String? uid;
+  final String? nombreEstudiante;
+
+  Materia(
+      {this.nombreCourse, this.numberGoup, this.uid, this.nombreEstudiante});
 }
 
-class NumberMateria {
-  final String numberGoup;
-  NumberMateria({required this.numberGoup});
-}

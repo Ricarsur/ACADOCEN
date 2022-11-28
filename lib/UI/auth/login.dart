@@ -76,7 +76,7 @@ class _LoginState extends State<Login> {
                         text: 'Iniciar sesión',
                         width: 200,
                         onPressed: () async {
-                          await loginService.userVerification(
+                          await loginService.authVerfication(
                             Usuario(
                                 correo: _nameController.text,
                                 password: _passwordController.text),

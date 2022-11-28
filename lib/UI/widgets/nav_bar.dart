@@ -19,7 +19,12 @@ class Menu extends StatefulWidget {
 
 class _MenuState extends State<Menu> {
   int currentTab = 0;
-  final List<Widget> screens = [Schedule(), GroupList()];
+  final List<Widget> screens = [
+    Schedule(),
+    GroupList(
+      idCourse: '',
+    )
+  ];
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = Schedule();
   String imagen1 = 'assets/svg/iconHome.svg';

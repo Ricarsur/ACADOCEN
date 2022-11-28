@@ -41,8 +41,8 @@ class _NewCourseState extends State<NewCourse> {
                     Button(
                       text: 'Crear materia',
                       onPressed: () async {
-                        await dataProfile.createMateria(
-                          NombreMateria(
+                        await dataProfile.verifyMateria(
+                          Materia(
                             nombreCourse: _nameCourse.text,
                           ),
                         );
