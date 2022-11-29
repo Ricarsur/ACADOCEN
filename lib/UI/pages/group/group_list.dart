@@ -5,6 +5,8 @@ import 'package:acadocen/UI/widgets/widgets.dart';
 import 'package:acadocen/domain/services/materia/data_profile.dart';
 import 'package:flutter/material.dart';
 
+import '../home/home.dart';
+
 class GroupList extends StatefulWidget {
   final String idCourse;
   const GroupList({super.key, required this.idCourse});
@@ -61,7 +63,7 @@ class _GroupListState extends State<GroupList> {
                       color: Color.fromRGBO(84, 100, 255, 1),
                       iconSize: 30,
                       onPressed: () {
-                        Navigator.pop(Get.context!);
+                        Get.to(() => Home(currentTab: 1));
                       },
                     ),
                   ),

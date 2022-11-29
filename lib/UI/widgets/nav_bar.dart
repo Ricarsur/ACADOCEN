@@ -7,9 +7,9 @@ import '../pages/course/course_list.dart';
 import '../pages/course/new_course.dart';
 
 class Menu extends StatefulWidget {
-  final int? pagina;
+  final int pagina;
   final VoidCallback onPressed;
-  const Menu({Key? key, required this.onPressed, this.pagina})
+  const Menu({Key? key, required this.onPressed, required this.pagina})
       : super(key: key);
 
   @override
@@ -17,7 +17,7 @@ class Menu extends StatefulWidget {
 }
 
 class _MenuState extends State<Menu> {
-  int? currentTab;
+  int currentTab = 0;
   @override
   void initState() {
     super.initState();
