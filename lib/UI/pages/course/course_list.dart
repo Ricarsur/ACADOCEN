@@ -1,6 +1,6 @@
 import 'package:acadocen/UI/widgets/card_course.dart';
 import 'package:acadocen/UI/widgets/widgets.dart';
-import 'package:acadocen/domain/services/user/data_profile.dart';
+import 'package:acadocen/domain/services/materia/data_profile.dart';
 import 'package:flutter/material.dart';
 
 class CourseList extends StatefulWidget {

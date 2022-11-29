@@ -8,7 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class StudentList extends StatefulWidget {
-  const StudentList({super.key});
+  final String? idCourse;
+  final String? idGroup;
+  const StudentList({super.key, this.idCourse, this.idGroup});
 
   @override
   State<StudentList> createState() => _StudentListState();
@@ -63,7 +65,10 @@ class _StudentListState extends State<StudentList> {
                 color: Colors.white,
               ),
               onPressed: () {
-                Get.to(() => NewStudent());
+                Get.to(() => NewStudent(
+                      idCourse: widget.idCourse,
+                      idGroup: widget.idGroup,
+                    ));
               },
             ),
           ),

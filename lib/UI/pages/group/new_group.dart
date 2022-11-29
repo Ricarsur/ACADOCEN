@@ -1,10 +1,9 @@
 import 'package:acadocen/UI/pages/pages.dart';
-import 'package:acadocen/domain/services/Materia/consul_materia.dart';
-import 'package:acadocen/domain/services/Materia/materia.dart';
-import 'package:acadocen/domain/services/user/data_profile.dart';
+import 'package:acadocen/models/materia.dart';
+import 'package:acadocen/domain/services/materia/data_profile.dart';
 import 'package:flutter/material.dart';
 
-import '../group/group_list.dart';
+import 'group_list.dart';
 
 class NewGroup extends StatefulWidget {
   final String idCourse;
@@ -14,8 +13,6 @@ class NewGroup extends StatefulWidget {
 }
 
 class _NewGroupState extends State<NewGroup> {
-  DataCourse dataCourse = DataCourse();
-
   DataProfile dataProfile = DataProfile();
 
   final TextEditingController _numberGroup = TextEditingController();

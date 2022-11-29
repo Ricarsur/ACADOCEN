@@ -1,8 +1,8 @@
-import 'package:acadocen/UI/pages/course/new_group.dart';
+import 'package:acadocen/UI/pages/group/new_group.dart';
 import 'package:acadocen/UI/pages/students/students_list.dart';
 import 'package:acadocen/UI/widgets/card_group.dart';
 import 'package:acadocen/UI/widgets/widgets.dart';
-import 'package:acadocen/domain/services/user/data_profile.dart';
+import 'package:acadocen/domain/services/materia/data_profile.dart';
 import 'package:flutter/material.dart';
 
 class GroupList extends StatefulWidget {
@@ -86,7 +86,10 @@ class _GroupListState extends State<GroupList> {
                               group: dataProfile.dataID[index].numberGoup
                                   .toString(),
                               onPressed: () {
-                                Get.to(() => StudentList());
+                                Get.to(() => StudentList(
+                                    idCourse: widget.idCourse,
+                                    idGroup:
+                                        dataProfile.dataID[index].numberGoup));
                               },
                             );
                           });

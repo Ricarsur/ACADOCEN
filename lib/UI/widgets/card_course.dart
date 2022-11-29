@@ -1,7 +1,7 @@
 import 'package:acadocen/UI/ui.dart';
 import 'package:flutter/material.dart';
 
-import '../../domain/services/user/data_profile.dart';
+import '../../domain/services/materia/data_profile.dart';
 
 class CardCourse extends StatelessWidget {
   final String name;

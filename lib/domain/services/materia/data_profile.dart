@@ -1,5 +1,5 @@
 import 'package:acadocen/domain/controller/control_user.dart';
-import 'package:acadocen/domain/services/Materia/materia.dart';
+import 'package:acadocen/models/materia.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -34,7 +34,8 @@ class DataProfile {
         .collection('materias')
         .doc(materia.uid)
         .collection('grupos')
-        .add({'nombre': materia.numberGoup})
+        .doc(materia.numberGoup)
+        .set({'nombre': materia.numberGoup})
         .then((value) => Get.snackbar('Good', 'Group Added'))
         .catchError(
             (error) => Get.snackbar('Error', 'Failed to add group: $error'));
