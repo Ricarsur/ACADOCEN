@@ -2,6 +2,7 @@ import 'package:acadocen/domain/services/services.dart';
 import 'package:acadocen/models/usuario.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class RegisterService {
   final FirebaseFirestore firebase = FirebaseFirestore.instance;
@@ -56,10 +57,15 @@ class RegisterService {
     }
   }*/
 
-  Future<void> authVerfication(Usuario user) async {
+  Future<void> authVerfication(BuildContext context, Usuario user) async {
     var mensaje = validateEmpty(user);
     try {
       if (mensaje == null) {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return Center(child: CircularProgressIndicator());
+            });
         UserCredential userCredentia = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(
                 email: user.correo, password: user.password);
@@ -70,6 +76,7 @@ class RegisterService {
           'password': user.password,
           'rol': user.rol,
         });
+        Navigator.of(context).pop();
         Get.snackbar(
             'Usuario registrado', 'El usuario se registró correctamente');
       } else {

@@ -83,6 +83,7 @@ class _RegisterState extends State<Register> {
                       width: 200,
                       onPressed: () async {
                         await registerService.authVerfication(
+                          context,
                           Usuario(
                             nombre: _nameController.text,
                             identificacion: _identificacion.text,

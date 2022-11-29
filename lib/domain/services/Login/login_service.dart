@@ -1,8 +1,8 @@
 import 'package:acadocen/domain/services/services.dart';
 import 'package:acadocen/models/usuario.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class LoginService {
   static TextEditingController nameController = TextEditingController();
@@ -24,7 +24,12 @@ class LoginService {
     }
   }
 
-  Future<void> userVerification(Usuario usuario) async {
+  Future<void> userVerification(BuildContext context, Usuario usuario) async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Center(child: CircularProgressIndicator());
+        });
     bool mensaje = false;
     String identificacion = '';
     await firebase
@@ -36,9 +41,11 @@ class LoginService {
           if (doc['correo'] == usuario.correo &&
               doc['password'] == usuario.password) {
             if (doc['rol'] == 'Profesor') {
+              Navigator.of(context).pop();
               Get.toNamed('/home');
               mensaje = true;
             } else {
+              Navigator.of(context).pop();
               identificacion = doc['identificacion'];
               Get.toNamed('/qr', arguments: identificacion);
               mensaje = true;
@@ -47,6 +54,7 @@ class LoginService {
         }
       });
     });
+
     if (mensaje == false) {
       Get.snackbar('Error', 'Usuario o contraseña incorrectos');
     }
@@ -65,13 +73,13 @@ class LoginService {
     }
   }*/
 
-  Future<void> authVerfication(Usuario usuario) async {
+  Future<void> authVerfication(BuildContext context, Usuario usuario) async {
     try {
       final UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(
               email: usuario.correo, password: usuario.password);
       if (userCredential.user != null) {
-        userVerification(usuario);
+        userVerification(context, usuario);
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
