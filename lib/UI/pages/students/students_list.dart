@@ -3,6 +3,7 @@ import 'package:acadocen/UI/pages/students/new_student.dart';
 import 'package:acadocen/UI/widgets/assistance_student.dart';
 import 'package:acadocen/UI/widgets/button.dart';
 import 'package:acadocen/UI/widgets/widgets.dart';
+import 'package:acadocen/domain/services/student/data_student.dart';
 import 'package:acadocen/domain/utils/date_utils.dart' as date_utils;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -17,6 +18,7 @@ class StudentList extends StatefulWidget {
 }
 
 class _StudentListState extends State<StudentList> {
+  DataStudent data = DataStudent();
   late ScrollController scrollController;
   List<DateTime> currentMonthsList = List.empty();
   DateTime _dateNow = DateTime.now();
@@ -137,7 +139,26 @@ class _StudentListState extends State<StudentList> {
                 ],
               ),
               SizedBox(height: 10),
-              AssistanceStudent(nameStudent: 'David Ravelo Bonett'),
+
+              FutureBuilder(
+                  future: data.getStudent(
+                      widget.idCourse.toString(), widget.idGroup.toString()),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: data.dataStudent.length,
+                          itemBuilder: (context, index) {
+                            return AssistanceStudent(
+                                nameStudent:
+                                    data.dataStudent[index].toString());
+                          });
+                    } else {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                  }),
+              //AssistanceStudent(nameStudent: 'David Ravelo Bonett'),
             ]),
           )),
         ),
