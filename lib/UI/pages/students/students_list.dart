@@ -63,7 +63,7 @@ class _StudentListState extends State<StudentList> {
                 heroTag: "btn1",
                 backgroundColor: Colors.transparent,
                 child: Icon(
-                  Icons.add,
+                  Icons.people,
                   color: Colors.white,
                 ),
                 onPressed: () {
@@ -73,7 +73,7 @@ class _StudentListState extends State<StudentList> {
             ),
             SizedBox(width: 14),
             Button(
-              text: 'Enviar asistencia',
+              text: 'Enviar',
               onPressed: () {},
               width: 140,
             ),
@@ -134,10 +134,20 @@ class _StudentListState extends State<StudentList> {
                       Text('Asistencia',
                           style: TextStyle(fontSize: 22, color: ColorsApp.title)
                               .copyWith(fontWeight: FontWeight.bold)),
-                      Text(
-                        'Matematicas',
-                        style: TextStyle(fontSize: 16, color: Colors.grey[500])
-                            .copyWith(fontWeight: FontWeight.w500),
+                      RichText(
+                        text: TextSpan(
+                          text: 'Curso: ',
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: ColorsApp.title,
+                              fontWeight: FontWeight.bold),
+                          children: <TextSpan>[
+                            TextSpan(
+                                text: widget.idGroup,
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.grey[500])),
+                          ],
+                        ),
                       )
                     ],
                   ),
@@ -160,16 +170,25 @@ class _StudentListState extends State<StudentList> {
                           fontWeight: FontWeight.w800,
                           fontSize: 19)),
                   Spacer(),
-                  Text(
-                      date_utils.DateUtils.months[_dateNow.month - 1] +
-                          ' ' +
-                          _dateNow.day.toString() +
-                          ', ' +
-                          _dateNow.year.toString(),
-                      style: TextStyle(
-                          fontSize: 14,
-                          color: Color.fromARGB(255, 106, 106, 106),
-                          fontWeight: FontWeight.w600)),
+                  Column(
+                    children: [
+                      Text(
+                          date_utils.DateUtils.months[_dateNow.month - 1] +
+                              ' ' +
+                              _dateNow.day.toString() +
+                              ', ' +
+                              _dateNow.year.toString(),
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: Color.fromARGB(255, 106, 106, 106),
+                              fontWeight: FontWeight.w600)),
+                      Text(widget.idCourse!,
+                          style: TextStyle(
+                                  fontSize: 16,
+                                  color: Color.fromARGB(255, 68, 68, 68))
+                              .copyWith(fontWeight: FontWeight.w500))
+                    ],
+                  ),
                 ],
               ),
               SizedBox(height: 10),
