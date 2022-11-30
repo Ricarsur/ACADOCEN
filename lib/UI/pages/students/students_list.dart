@@ -40,6 +40,37 @@ class _StudentListState extends State<StudentList> {
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Container(
+            width: 55,
+            height: 55,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(40)),
+              gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [
+                  ColorsApp.gradiant1,
+                  ColorsApp.gradiant2,
+                ],
+              ),
+            ),
+            child: FloatingActionButton(
+              backgroundColor: Colors.transparent,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NewStudent(
+                      idCourse: widget.idCourse,
+                      idGroup: widget.idGroup,
+                    ),
+                  ),
+                );
+              },
+              child: const Icon(Icons.people, color: Colors.white),
+            ),
+          ),
+          SizedBox(width: 14),
           Button(
             text: 'Enviar asistencia',
             onPressed: () {},
