@@ -1,3 +1,4 @@
+import 'package:acadocen/UI/pages/asistencia/attendance.dart';
 import 'package:acadocen/UI/pages/qr/scanQr.dart';
 import 'package:acadocen/UI/pages/students/new_student.dart';
 import 'package:acadocen/UI/widgets/assistance_student.dart';
@@ -57,15 +58,7 @@ class _StudentListState extends State<StudentList> {
             child: FloatingActionButton(
               backgroundColor: Colors.transparent,
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => NewStudent(
-                      idCourse: widget.idCourse,
-                      idGroup: widget.idGroup,
-                    ),
-                  ),
-                );
+                Get.to(() => AttendanceQuery());
               },
               child: const Icon(Icons.people, color: Colors.white),
             ),

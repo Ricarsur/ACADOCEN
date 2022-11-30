@@ -1,14 +1,14 @@
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class AttendanceList extends StatefulWidget {
-  const AttendanceList({super.key});
+class AttendanceQuery extends StatefulWidget {
+  const AttendanceQuery({super.key});
 
   @override
-  State<AttendanceList> createState() => _AttendanceListState();
+  State<AttendanceQuery> createState() => _AttendanceQueryState();
 }
 
-class _AttendanceListState extends State<AttendanceList> {
+class _AttendanceQueryState extends State<AttendanceQuery> {
   @override
   Widget build(BuildContext context) {
     return Container();
