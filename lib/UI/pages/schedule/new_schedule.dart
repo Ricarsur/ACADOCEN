@@ -1,5 +1,9 @@
 import 'package:acadocen/UI/pages/pages.dart';
+import 'package:acadocen/domain/controller/control_course.dart';
+import 'package:acadocen/domain/services/materia/data_profile.dart';
+import 'package:acadocen/models/materia.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class NewSchedule extends StatefulWidget {
   const NewSchedule({super.key});
@@ -9,6 +13,10 @@ class NewSchedule extends StatefulWidget {
 }
 
 class _NewScheduleState extends State<NewSchedule> {
+  DataProfile dataProfile = DataProfile();
+  ControlCourse controlCourse = Get.put(ControlCourse());
+  late Future<List<Materia>?> materia = dataProfile.getMateria();
+
   DateTime now = DateTime.now();
   TimeOfDay timeInitial = TimeOfDay.now();
   TimeOfDay timeFinal = TimeOfDay.now();
@@ -191,7 +199,9 @@ class _NewScheduleState extends State<NewSchedule> {
                               padding: const EdgeInsets.only(top: 0),
                               child: Combobox(
                                 hintText: "Seleccionar materia",
-                                list: ['Matematicas', 'Biologia'],
+                                list: controlCourse.getAllMaterias!
+                                    .map((e) => e.nombreCourse)
+                                    .toList(),
                                 controllerText: _materia,
                               ),
                             )

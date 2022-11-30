@@ -1,4 +1,3 @@
-import 'package:acadocen/domain/controller/control_user.dart';
 import 'package:acadocen/models/materia.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,7 +7,6 @@ class DataProfile {
   //final FirebaseAuth ? user = FirebaseAuth.instance;
   final FirebaseAuth auth = FirebaseAuth.instance;
   List<Materia> dataID = [];
-  ControlUser controlUser = ControlUser();
 
   Future createMateria(Materia materia) async {
     final User? user = auth.currentUser;
@@ -55,7 +53,7 @@ class DataProfile {
         .catchError(
             (error) => Get.snackbar('Error', 'Failed to add materia: $error'));
   }*/
-  Future<dynamic> getMateria() async {
+  Future<List<Materia>?> getMateria() async {
     final User? user = auth.currentUser;
     final uid = user!.uid;
     dataID.clear();
@@ -71,7 +69,7 @@ class DataProfile {
         print(doc.id);
       });
     });
-    return dataID;
+    return await dataID;
   }
 
   Future verifyMateria(Materia materia) async {
