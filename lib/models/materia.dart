@@ -7,3 +7,4 @@ class Materia {
   Materia(
       {this.nombreCourse, this.numberGoup, this.uid, this.nombreEstudiante});
 }
+
