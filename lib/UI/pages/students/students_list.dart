@@ -1,4 +1,3 @@
-import 'package:acadocen/UI/pages/asistencia/attendance.dart';
 import 'package:acadocen/UI/pages/qr/scanQr.dart';
 import 'package:acadocen/UI/pages/students/new_student.dart';
 import 'package:acadocen/UI/widgets/assistance_student.dart';
@@ -8,6 +7,8 @@ import 'package:acadocen/domain/services/student/data_student.dart';
 import 'package:acadocen/domain/utils/date_utils.dart' as date_utils;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import '../asistencia/attendance.dart';
 
 class StudentList extends StatefulWidget {
   final String? idCourse;
@@ -38,67 +39,76 @@ class _StudentListState extends State<StudentList> {
   Widget build(BuildContext context) {
     var _query = MediaQuery.of(context).size;
     return Scaffold(
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: 55,
-            height: 55,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(40)),
-              gradient: LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [
-                  ColorsApp.gradiant1,
-                  ColorsApp.gradiant2,
-                ],
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: 55,
+              height: 55,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(40)),
+                gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [
+                    ColorsApp.gradiant1,
+                    ColorsApp.gradiant2,
+                  ],
+                ),
+              ),
+              child: FloatingActionButton(
+                heroTag: "btn1",
+                backgroundColor: Colors.transparent,
+                child: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  Get.to(() => AttendanceQuery());
+                },
               ),
             ),
-            child: FloatingActionButton(
-              backgroundColor: Colors.transparent,
-              onPressed: () {
-                Get.to(() => AttendanceQuery());
-              },
-              child: const Icon(Icons.people, color: Colors.white),
+            SizedBox(width: 14),
+            Button(
+              text: 'Enviar asistencia',
+              onPressed: () {},
+              width: 140,
             ),
-          ),
-          SizedBox(width: 14),
-          Button(
-            text: 'Enviar asistencia',
-            onPressed: () {},
-            width: 200,
-          ),
-          SizedBox(width: 14),
-          Container(
-            width: 55,
-            height: 55,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(40)),
-              gradient: LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [
-                  ColorsApp.gradiant1,
-                  ColorsApp.gradiant2,
-                ],
+            SizedBox(width: 14),
+            Container(
+              width: 55,
+              height: 55,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(40)),
+                gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [
+                    ColorsApp.gradiant1,
+                    ColorsApp.gradiant2,
+                  ],
+                ),
+              ),
+              child: FloatingActionButton(
+                heroTag: "btn2",
+                backgroundColor: Colors.transparent,
+                child: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  Get.to(() => NewStudent(
+                        idCourse: widget.idCourse,
+                        idGroup: widget.idGroup,
+                      ));
+                },
               ),
             ),
-            child: FloatingActionButton(
-              backgroundColor: Colors.transparent,
-              child: Icon(
-                Icons.add,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Get.to(() => NewStudent(
-                      idCourse: widget.idCourse,
-                      idGroup: widget.idGroup,
-                    ));
-              },
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
