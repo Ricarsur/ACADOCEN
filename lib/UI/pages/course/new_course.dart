@@ -12,6 +12,10 @@ class NewCourse extends StatefulWidget {
 }
 
 class _NewCourseState extends State<NewCourse> {
+  refreshContext() {
+    Get.forceAppUpdate();
+  }
+
   DataProfile dataProfile = DataProfile();
   final TextEditingController _nameCourse = TextEditingController();
 
@@ -45,6 +49,7 @@ class _NewCourseState extends State<NewCourse> {
                             nombreCourse: _nameCourse.text,
                           ),
                         );
+                        refreshContext();
                       },
                       width: 200,
                     ),

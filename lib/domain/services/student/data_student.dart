@@ -35,6 +35,7 @@ class DataStudent {
   Future<dynamic> getStudent(String materia, String grupo) async {
     final User? user = auth.currentUser;
     final uid = user!.uid;
+    dataStudent.clear();
     await FirebaseFirestore.instance
         .collection('usuario')
         .doc(user.uid)

@@ -11,6 +11,10 @@ class CourseList extends StatefulWidget {
 }
 
 class _CourseListState extends State<CourseList> {
+  void refrescar() {
+    Get.forceAppUpdate();
+  }
+
   @override
   Widget build(BuildContext context) {
     DataProfile dataProfile = DataProfile();

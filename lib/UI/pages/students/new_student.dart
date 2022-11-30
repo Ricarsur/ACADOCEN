@@ -3,6 +3,7 @@ import 'package:acadocen/domain/services/student/data_student.dart';
 import 'package:acadocen/models/estudiante.dart';
 import 'package:acadocen/models/materia.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class NewStudent extends StatefulWidget {
   final String? idCourse;
@@ -13,6 +14,10 @@ class NewStudent extends StatefulWidget {
 }
 
 class _NewStudentState extends State<NewStudent> {
+  void refrescar() {
+    Get.forceAppUpdate();
+  }
+
   DataStudent student = DataStudent();
 
   final TextEditingController _nombreEstudent = TextEditingController();
@@ -74,6 +79,7 @@ class _NewStudentState extends State<NewStudent> {
                 iconSize: 30,
                 onPressed: () {
                   Navigator.pop(context);
+                  refrescar();
                 },
               ),
             )

@@ -10,6 +10,11 @@ class DataProfile {
   List<Materia> dataID = [];
   ControlUser controlUser = ControlUser();
 
+  @override
+  refreshContext() {
+    Get.forceAppUpdate();
+  }
+
   Future createMateria(Materia materia) async {
     final User? user = auth.currentUser;
     final uid = user!.uid;
@@ -135,6 +140,7 @@ class DataProfile {
       Get.snackbar('Materia', 'Materia Eliminada');
     }).catchError((error) =>
             Get.snackbar('Error', 'Failed to delete materia: $error'));
+    refreshContext();
   }
 
   deleteGroup(String course, String group) async {
@@ -152,5 +158,6 @@ class DataProfile {
       Get.snackbar('Grupo', 'Grupo Eliminado');
     }).catchError(
             (error) => Get.snackbar('Error', 'Failed to delete grupo: $error'));
+    refreshContext();
   }
 }

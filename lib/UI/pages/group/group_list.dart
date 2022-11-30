@@ -16,6 +16,10 @@ class GroupList extends StatefulWidget {
 }
 
 class _GroupListState extends State<GroupList> {
+  void refrescar() {
+    Get.forceAppUpdate();
+  }
+
   DataProfile dataProfile = DataProfile();
   @override
   Widget build(BuildContext context) {
@@ -64,6 +68,7 @@ class _GroupListState extends State<GroupList> {
                       iconSize: 30,
                       onPressed: () {
                         Get.to(() => Home(currentTab: 1));
+                        refrescar();
                       },
                     ),
                   ),

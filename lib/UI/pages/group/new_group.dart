@@ -2,6 +2,7 @@ import 'package:acadocen/UI/pages/pages.dart';
 import 'package:acadocen/models/materia.dart';
 import 'package:acadocen/domain/services/materia/data_profile.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'group_list.dart';
 
@@ -13,6 +14,10 @@ class NewGroup extends StatefulWidget {
 }
 
 class _NewGroupState extends State<NewGroup> {
+  void refrescar() {
+    Get.forceAppUpdate();
+  }
+
   DataProfile dataProfile = DataProfile();
 
   final TextEditingController _numberGroup = TextEditingController();
@@ -48,6 +53,7 @@ class _NewGroupState extends State<NewGroup> {
                               uid: widget.idCourse.toString()),
                         );
                         await dataProfile.getMateria();
+                        refrescar();
                       },
                       width: 200,
                     ),
