@@ -1,4 +1,3 @@
-import 'package:acadocen/domain/controller/control_user.dart';
 import 'package:acadocen/models/materia.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,7 +7,6 @@ class DataProfile {
   //final FirebaseAuth ? user = FirebaseAuth.instance;
   final FirebaseAuth auth = FirebaseAuth.instance;
   List<Materia> dataID = [];
-  ControlUser controlUser = ControlUser();
 
   @override
   refreshContext() {

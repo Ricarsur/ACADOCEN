@@ -1,5 +1,8 @@
 import 'package:acadocen/UI/pages/pages.dart';
+import 'package:acadocen/domain/controller/materia/materia_controller.dart';
+import 'package:acadocen/domain/services/materia/data_profile.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class NewSchedule extends StatefulWidget {
   const NewSchedule({super.key});
@@ -13,11 +16,16 @@ class _NewScheduleState extends State<NewSchedule> {
   TimeOfDay timeInitial = TimeOfDay.now();
   TimeOfDay timeFinal = TimeOfDay.now();
   late String formattedDate = DateFormat('EEEE, MMM d, yyyy').format(now);
+  DataProfile dataProfile = DataProfile();
 
   final TextEditingController _materia = TextEditingController();
   final TextEditingController _grupos = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    Get.put(ControllerMateria());
+    ControllerMateria controllerMateria = Get.find();
+    var data = controllerMateria.materia!.map((e) => e.nombreCourse).toList();
+    controllerMateria.getMateria().then((value) => value);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -191,7 +199,7 @@ class _NewScheduleState extends State<NewSchedule> {
                               padding: const EdgeInsets.only(top: 0),
                               child: Combobox(
                                 hintText: "Seleccionar materia",
-                                list: ['Matematicas', 'Biologia'],
+                                list: data,
                                 controllerText: _materia,
                               ),
                             )
