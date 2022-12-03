@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:acadocen/domain/utils/date_utils.dart' as date_utils;
 import 'package:get/get.dart';
 
+import '../../../domain/services/horario/data_horario.dart';
+import '../../widgets/card_schedule.dart';
+
 class Schedule extends StatefulWidget {
   const Schedule({super.key});
 
@@ -11,6 +14,8 @@ class Schedule extends StatefulWidget {
 }
 
 class _ScheduleState extends State<Schedule> {
+  DateTime fecha = DateTime.now();
+  DataHorario dataHorario = DataHorario();
   late ScrollController scrollController;
   List<DateTime> currentMonthsList = List.empty();
   DateTime _dateNow = DateTime.now();
@@ -81,6 +86,9 @@ class _ScheduleState extends State<Schedule> {
               selectedDay: _dateNow,
               changeDay: (value) => setState(() {
                 _dateNow = value;
+                print(fecha);
+                fecha = value;
+                print(fecha);
               }),
               enableWeeknumberText: false,
               weeknumberColor: const Color.fromARGB(255, 30, 82, 160),
@@ -91,25 +99,52 @@ class _ScheduleState extends State<Schedule> {
               weekdays: const ["Lun", "Mar", "Mie", "Jue", "Vie", "Sáb", "Dom"],
               daysInWeek: 7,
             ),
-            Column(
-              children: [
-                SizedBox(height: 80),
-                Image.asset(
-                  'assets/images/claritysad.png',
-                  width: 80,
-                ),
-                SizedBox(height: 10),
-                Text(
-                  '¡Aún no tienes ningún horario creado',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  'agregue nuevas tareas para que \nsu día sea productivo',
-                  style: TextStyle(fontSize: 16),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            )
+            FutureBuilder(
+                future: DataHorario.getShedule(fecha),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: DataHorario.dataSchedule.length,
+                      itemBuilder: (context, index) {
+                        if (DataHorario.dataSchedule.length < 1) {
+                          return Column(
+                            children: [
+                              SizedBox(height: 80),
+                              Image.asset(
+                                'assets/images/claritysad.png',
+                                width: 80,
+                              ),
+                              SizedBox(height: 10),
+                              Text(
+                                '¡Aún no tienes ningún horario creado',
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                'agregue nuevas tareas para que \nsu día sea productivo',
+                                style: TextStyle(fontSize: 16),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          );
+                        } else {
+                          return CardSchedule(
+                            nombreHorario:
+                                DataHorario.dataSchedule[index].nombreHorario,
+                            grupo: DataHorario.dataSchedule[index].grupo,
+                            horaInicio:
+                                DataHorario.dataSchedule[index].horaInicio,
+                            horaFinal:
+                                DataHorario.dataSchedule[index].horaFinal,
+                          );
+                        }
+                      },
+                    );
+                  } else {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                }),
           ],
         ),
       ),

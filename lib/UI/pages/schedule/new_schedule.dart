@@ -17,6 +17,10 @@ class NewSchedule extends StatefulWidget {
 }
 
 class _NewScheduleState extends State<NewSchedule> {
+  void refrescar() {
+    Get.forceAppUpdate();
+  }
+
   String hintText = 'Seleccione materia';
   DateTime now = DateTime.now();
   TimeOfDay timeInitial = TimeOfDay.now();
@@ -351,6 +355,7 @@ class _NewScheduleState extends State<NewSchedule> {
                         iconSize: 30,
                         onPressed: () {
                           Navigator.pop(context);
+                          refrescar();
                         },
                       ),
                     )
