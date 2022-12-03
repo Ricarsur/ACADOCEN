@@ -105,6 +105,8 @@ class _ScheduleState extends State<Schedule> {
                   if (snapshot.hasData) {
                     return ListView.builder(
                       shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      physics: const ScrollPhysics(),
                       itemCount: DataHorario.dataSchedule.length,
                       itemBuilder: (context, index) {
                         if (DataHorario.dataSchedule.length < 1) {
