@@ -7,7 +7,7 @@ class DataProfile {
   //final FirebaseAuth ? user = FirebaseAuth.instance;
   final FirebaseAuth auth = FirebaseAuth.instance;
   static List<Materia> dataID = [];
-  final user = FirebaseAuth.instance.currentUser!.uid;
+
 
   @override
   refreshContext() {

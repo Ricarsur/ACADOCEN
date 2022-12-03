@@ -1,7 +1,9 @@
 import 'package:acadocen/UI/pages/pages.dart';
 import 'package:acadocen/domain/controller/materia/materia_controller.dart';
+import 'package:acadocen/domain/services/horario/data_horario.dart';
 import 'package:acadocen/domain/services/materia/data_profile.dart';
 import 'package:acadocen/lib.dart';
+import 'package:acadocen/models/shedule.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +26,7 @@ class _NewScheduleState extends State<NewSchedule> {
 
   final TextEditingController _materia = TextEditingController();
   final TextEditingController _grupos = TextEditingController();
-
+  final TextEditingController _nombreHorario = TextEditingController();
   ControllerMateria controllerMateria = Get.find();
   String materiaBuscar = '';
   @override
@@ -49,6 +51,11 @@ class _NewScheduleState extends State<NewSchedule> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            TexField(
+                                text: 'Nombre del horario',
+                                type: TextInputType.text,
+                                controllerText: _nombreHorario),
+                            SizedBox(height: 30),
                             Text(
                               'Seleccionar dia',
                               style: const TextStyle(
@@ -200,6 +207,7 @@ class _NewScheduleState extends State<NewSchedule> {
                                   color: Color.fromARGB(255, 80, 80, 80),
                                   fontWeight: FontWeight.bold),
                             ),
+                            SizedBox(height: 10),
                             Padding(
                               padding: const EdgeInsets.only(top: 0),
                               child: StreamBuilder(
@@ -264,7 +272,7 @@ class _NewScheduleState extends State<NewSchedule> {
                             )
                           ],
                         ),
-                        SizedBox(height: 30),
+                        SizedBox(height: 35),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -312,7 +320,21 @@ class _NewScheduleState extends State<NewSchedule> {
                         SizedBox(height: 40),
                         Button(
                           text: 'Crear horario',
-                          onPressed: () {},
+                          onPressed: () async {
+                            await DataHorario.createSchedule(
+                              Shedule(
+                                  nombreHorario: _nombreHorario.text,
+                                  fechaInio: now,
+                                  materia: _materia.text,
+                                  grupo: _grupos.text,
+                                  horaInicio: timeInitial.hour.toString() +
+                                      ':' +
+                                      timeInitial.minute.toString(),
+                                  horaFinal: timeFinal.hour.toString() +
+                                      ':' +
+                                      timeFinal.minute.toString()),
+                            );
+                          },
                           width: 200,
                         ),
                       ],
