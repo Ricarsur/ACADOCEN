@@ -202,38 +202,65 @@ class _NewScheduleState extends State<NewSchedule> {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 0),
-                              child: Container(
-                                width: 600,
-                                padding: const EdgeInsets.only(left: 13),
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[200],
-                                  borderRadius: BorderRadius.circular(7),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        blurRadius: 5,
-                                        spreadRadius: 2,
-                                        offset: const Offset(0, 3))
-                                  ],
-                                ),
-                                child: DropdownButton(
-                                  underline: Container(),
-                                  items: data.map((dynamic value) {
-                                    return DropdownMenuItem(
-                                      value: value,
-                                      child: Text(value),
+                              child: StreamBuilder(
+                                  stream: FirebaseFirestore.instance
+                                      .collection('usuario')
+                                      .doc(FirebaseAuth
+                                          .instance.currentUser!.uid)
+                                      .collection('materias')
+                                      .orderBy('nombre')
+                                      .snapshots(),
+                                  builder: (BuildContext context,
+                                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                                    if (!snapshot.hasData) {
+                                      return Text('Cargando...');
+                                    }
+                                    return Padding(
+                                      padding: const EdgeInsets.only(top: 0),
+                                      child: Container(
+                                        width: 600,
+                                        padding:
+                                            const EdgeInsets.only(left: 13),
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[200],
+                                          borderRadius:
+                                              BorderRadius.circular(7),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.grey
+                                                    .withOpacity(0.5),
+                                                blurRadius: 5,
+                                                spreadRadius: 2,
+                                                offset: const Offset(0, 3))
+                                          ],
+                                        ),
+                                        child: DropdownButton(
+                                          underline: Container(),
+                                          items: snapshot.data!.docs
+                                              .map((DocumentSnapshot document) {
+                                            return DropdownMenuItem(
+                                              child: Text(
+                                                document['nombre'],
+                                                style: const TextStyle(
+                                                    fontSize: 14,
+                                                    color: Color.fromARGB(
+                                                        211, 15, 15, 15)),
+                                              ),
+                                              value: document['nombre'],
+                                            );
+                                          }).toList(),
+                                          onChanged: (dynamic value) => {
+                                            setState(() {
+                                              materiaBuscar = value;
+                                              hintText = value;
+                                              _materia.text = value;
+                                            })
+                                          },
+                                          hint: Text(hintText),
+                                        ),
+                                      ),
                                     );
-                                  }).toList(),
-                                  onChanged: (dynamic value) => {
-                                    setState(() {
-                                      materiaBuscar = value;
-                                      hintText = value;
-                                      _materia.text = value;
-                                    })
-                                  },
-                                  hint: Text(hintText),
-                                ),
-                              ),
+                                  }),
                             )
                           ],
                         ),
@@ -277,7 +304,7 @@ class _NewScheduleState extends State<NewSchedule> {
                                   )
                                 : Combobox(
                                     hintText: "Seleccionar grupo",
-                                    list: [''],
+                                    list: [],
                                     controllerText: _grupos,
                                   ),
                           ],
