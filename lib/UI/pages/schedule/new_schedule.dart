@@ -15,6 +15,7 @@ class NewSchedule extends StatefulWidget {
 }
 
 class _NewScheduleState extends State<NewSchedule> {
+  String hintText = 'Seleccione materia';
   DateTime now = DateTime.now();
   TimeOfDay timeInitial = TimeOfDay.now();
   TimeOfDay timeFinal = TimeOfDay.now();
@@ -25,7 +26,7 @@ class _NewScheduleState extends State<NewSchedule> {
   final TextEditingController _grupos = TextEditingController();
 
   ControllerMateria controllerMateria = Get.find();
-
+  String materiaBuscar = '';
   @override
   Widget build(BuildContext context) {
     var data = controllerMateria.materia!.map((e) => e.nombreCourse).toList();
@@ -201,10 +202,37 @@ class _NewScheduleState extends State<NewSchedule> {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 0),
-                              child: Combobox(
-                                hintText: "Seleccionar materia",
-                                list: data,
-                                controllerText: _materia,
+                              child: Container(
+                                width: 600,
+                                padding: const EdgeInsets.only(left: 13),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[200],
+                                  borderRadius: BorderRadius.circular(7),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        blurRadius: 5,
+                                        spreadRadius: 2,
+                                        offset: const Offset(0, 3))
+                                  ],
+                                ),
+                                child: DropdownButton(
+                                  underline: Container(),
+                                  items: data.map((dynamic value) {
+                                    return DropdownMenuItem(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                  onChanged: (dynamic value) => {
+                                    setState(() {
+                                      materiaBuscar = value;
+                                      hintText = value;
+                                      _materia.text = value;
+                                    })
+                                  },
+                                  hint: Text(hintText),
+                                ),
                               ),
                             )
                           ],
@@ -220,31 +248,38 @@ class _NewScheduleState extends State<NewSchedule> {
                                   color: Color.fromARGB(255, 80, 80, 80),
                                   fontWeight: FontWeight.bold),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 0),
-                              child: StreamBuilder(
-                                  stream: FirebaseFirestore.instance
-                                      .collection('usuario')
-                                      .doc(FirebaseAuth
-                                          .instance.currentUser!.uid)
-                                      .collection('materias')
-                                      .doc('Ingles')
-                                      .collection('grupos')
-                                      .snapshots(),
-                                  builder: (BuildContext context,
-                                      AsyncSnapshot<QuerySnapshot> snapshot) {
-                                    if (!snapshot.hasData) {
-                                      return Text('Cargando...');
-                                    }
-                                    return Combobox(
-                                      hintText: "Seleccionar grupo",
-                                      list: snapshot.data!.docs
-                                          .map((e) => e['nombre'])
-                                          .toList(),
-                                      controllerText: _grupos,
-                                    );
-                                  }),
-                            ),
+                            materiaBuscar != ''
+                                ? Padding(
+                                    padding: const EdgeInsets.only(top: 0),
+                                    child: StreamBuilder(
+                                        stream: FirebaseFirestore.instance
+                                            .collection('usuario')
+                                            .doc(FirebaseAuth
+                                                .instance.currentUser!.uid)
+                                            .collection('materias')
+                                            .doc(materiaBuscar)
+                                            .collection('grupos')
+                                            .snapshots(),
+                                        builder: (BuildContext context,
+                                            AsyncSnapshot<QuerySnapshot>
+                                                snapshot) {
+                                          if (!snapshot.hasData) {
+                                            return Text('Cargando...');
+                                          }
+                                          return Combobox(
+                                            hintText: "Seleccionar grupo",
+                                            list: snapshot.data!.docs
+                                                .map((e) => e['nombre'])
+                                                .toList(),
+                                            controllerText: _grupos,
+                                          );
+                                        }),
+                                  )
+                                : Combobox(
+                                    hintText: "Seleccionar grupo",
+                                    list: [''],
+                                    controllerText: _grupos,
+                                  ),
                           ],
                         ),
                         SizedBox(height: 40),
