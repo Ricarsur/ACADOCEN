@@ -1,6 +1,9 @@
 import 'package:acadocen/UI/pages/pages.dart';
 import 'package:acadocen/domain/controller/materia/materia_controller.dart';
 import 'package:acadocen/domain/services/materia/data_profile.dart';
+import 'package:acadocen/lib.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -219,11 +222,28 @@ class _NewScheduleState extends State<NewSchedule> {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 0),
-                              child: Combobox(
-                                hintText: 'Seleccionar un grupo',
-                                list: [],
-                                controllerText: _grupos,
-                              ),
+                              child: StreamBuilder(
+                                  stream: FirebaseFirestore.instance
+                                      .collection('usuario')
+                                      .doc(FirebaseAuth
+                                          .instance.currentUser!.uid)
+                                      .collection('materias')
+                                      .doc('Ingles')
+                                      .collection('grupos')
+                                      .snapshots(),
+                                  builder: (BuildContext context,
+                                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                                    if (!snapshot.hasData) {
+                                      return Text('Cargando...');
+                                    }
+                                    return Combobox(
+                                      hintText: "Seleccionar grupo",
+                                      list: snapshot.data!.docs
+                                          .map((e) => e['nombre'])
+                                          .toList(),
+                                      controllerText: _grupos,
+                                    );
+                                  }),
                             ),
                           ],
                         ),
