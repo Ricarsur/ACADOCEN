@@ -1,10 +1,9 @@
 class Materia {
   final String? nombreCourse;
-  final String? numberGoup;
+  final String? numberGroup;
   final String? uid;
   final String? nombreEstudiante;
 
   Materia(
-      {this.nombreCourse, this.numberGoup, this.uid, this.nombreEstudiante});
+      {this.nombreCourse, this.numberGroup, this.uid, this.nombreEstudiante});
 }
-

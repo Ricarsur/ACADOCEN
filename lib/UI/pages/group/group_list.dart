@@ -86,17 +86,17 @@ class _GroupListState extends State<GroupList> {
                       return ListView.builder(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
-                          itemCount: dataProfile.dataID.length,
+                          itemCount: DataProfile.dataID.length,
                           itemBuilder: (context, index) {
                             return CardGroup(
                               couser: widget.idCourse,
-                              group: dataProfile.dataID[index].numberGoup
+                              group: DataProfile.dataID[index].numberGroup
                                   .toString(),
                               onPressed: () {
                                 Get.to(() => StudentList(
                                     idCourse: widget.idCourse,
                                     idGroup:
-                                        dataProfile.dataID[index].numberGoup));
+                                        DataProfile.dataID[index].numberGroup));
                               },
                             );
                           });

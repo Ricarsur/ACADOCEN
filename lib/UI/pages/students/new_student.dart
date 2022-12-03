@@ -60,7 +60,7 @@ class _NewStudentState extends State<NewStudent> {
                               uid: _idEstudent.text,
                               materia: Materia(
                                   nombreCourse: widget.idCourse,
-                                  numberGoup: widget.idGroup)),
+                                  numberGroup: widget.idGroup)),
                         );
                       },
                       width: 200,

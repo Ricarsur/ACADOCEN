@@ -20,10 +20,11 @@ class _NewScheduleState extends State<NewSchedule> {
 
   final TextEditingController _materia = TextEditingController();
   final TextEditingController _grupos = TextEditingController();
+
+  ControllerMateria controllerMateria = Get.find();
+
   @override
   Widget build(BuildContext context) {
-    Get.put(ControllerMateria());
-    ControllerMateria controllerMateria = Get.find();
     var data = controllerMateria.materia!.map((e) => e.nombreCourse).toList();
     controllerMateria.getMateria().then((value) => value);
     return Scaffold(
@@ -220,7 +221,7 @@ class _NewScheduleState extends State<NewSchedule> {
                               padding: const EdgeInsets.only(top: 0),
                               child: Combobox(
                                 hintText: 'Seleccionar un grupo',
-                                list: ['Grupo 01', 'Grupo 02'],
+                                list: [],
                                 controllerText: _grupos,
                               ),
                             ),

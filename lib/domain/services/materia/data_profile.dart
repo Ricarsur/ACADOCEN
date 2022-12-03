@@ -6,7 +6,8 @@ import 'package:get/get.dart';
 class DataProfile {
   //final FirebaseAuth ? user = FirebaseAuth.instance;
   final FirebaseAuth auth = FirebaseAuth.instance;
-  List<Materia> dataID = [];
+  static List<Materia> dataID = [];
+  final user = FirebaseAuth.instance.currentUser!.uid;
 
   @override
   refreshContext() {
@@ -37,8 +38,8 @@ class DataProfile {
         .collection('materias')
         .doc(materia.uid)
         .collection('grupos')
-        .doc(materia.numberGoup)
-        .set({'nombre': materia.numberGoup})
+        .doc(materia.numberGroup)
+        .set({'nombre': materia.numberGroup})
         .then((value) => Get.snackbar('Good', 'Group Added'))
         .catchError(
             (error) => Get.snackbar('Error', 'Failed to add group: $error'));
@@ -58,13 +59,11 @@ class DataProfile {
         .catchError(
             (error) => Get.snackbar('Error', 'Failed to add materia: $error'));
   }*/
-  Future<dynamic> getMateria() async {
-    final User? user = auth.currentUser;
-    final uid = user!.uid;
+  static Future<List<Materia>> getMateria() async {
     dataID.clear();
     await FirebaseFirestore.instance
         .collection('usuario')
-        .doc(user.uid)
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('materias')
         .orderBy('nombre')
         .get()
@@ -118,7 +117,7 @@ class DataProfile {
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
-        dataID.add(Materia(numberGoup: doc['nombre']));
+        dataID.add(Materia(numberGroup: doc['nombre']));
         print(doc.id);
       });
     });

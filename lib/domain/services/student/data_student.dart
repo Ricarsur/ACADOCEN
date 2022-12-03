@@ -18,13 +18,13 @@ class DataStudent {
         .collection('materias')
         .doc(estudiante.materia.nombreCourse)
         .collection('grupos')
-        .doc(estudiante.materia.numberGoup)
+        .doc(estudiante.materia.numberGroup)
         .collection('estudiantes')
         .add({
           'uid': user.uid,
           'nombre': estudiante.nombre,
           'materia': estudiante.materia.nombreCourse,
-          'grupo': estudiante.materia.numberGoup,
+          'grupo': estudiante.materia.numberGroup,
           'estado': estudiante.estado ?? false,
         })
         .then((value) => Get.snackbar('Good', 'Student Added'))

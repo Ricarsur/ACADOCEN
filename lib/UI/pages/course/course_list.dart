@@ -33,20 +33,20 @@ class _CourseListState extends State<CourseList> {
                       .copyWith(fontWeight: FontWeight.bold)),
               SizedBox(height: 20),
               FutureBuilder(
-                  future: dataProfile.getMateria(),
+                  future: DataProfile.getMateria(),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return ListView.builder(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
-                          itemCount: dataProfile.dataID.length,
+                          itemCount: DataProfile.dataID.length,
                           itemBuilder: (context, index) {
                             return CardCourse(
-                              name: dataProfile.dataID[index].nombreCourse
+                              name: DataProfile.dataID[index].nombreCourse
                                   .toString(),
                               onPressed: () {
                                 Get.to(() => GroupList(
-                                      idCourse: dataProfile
+                                      idCourse: DataProfile
                                           .dataID[index].nombreCourse
                                           .toString(),
                                     ));

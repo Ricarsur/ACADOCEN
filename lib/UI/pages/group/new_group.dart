@@ -49,10 +49,10 @@ class _NewGroupState extends State<NewGroup> {
                       onPressed: () async {
                         await dataProfile.createGroupMateria(
                           Materia(
-                              numberGoup: _numberGroup.text,
+                              numberGroup: _numberGroup.text,
                               uid: widget.idCourse.toString()),
                         );
-                        await dataProfile.getMateria();
+                        await DataProfile.getMateria();
                         refrescar();
                       },
                       width: 200,
