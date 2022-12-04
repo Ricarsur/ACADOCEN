@@ -8,7 +8,6 @@ class DataProfile {
   final FirebaseAuth auth = FirebaseAuth.instance;
   static List<Materia> dataID = [];
 
-
   @override
   refreshContext() {
     Get.forceAppUpdate();
@@ -45,7 +44,6 @@ class DataProfile {
             (error) => Get.snackbar('Error', 'Failed to add group: $error'));
   }
 
-
   static Future<List<Materia>> getMateria() async {
     dataID.clear();
     await FirebaseFirestore.instance
@@ -57,7 +55,6 @@ class DataProfile {
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
         dataID.add(Materia(nombreCourse: doc['nombre']));
-        print(doc.id);
       });
     });
     return dataID;
@@ -105,7 +102,6 @@ class DataProfile {
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
         dataID.add(Materia(numberGroup: doc['nombre']));
-        print(doc.id);
       });
     });
     return dataID;

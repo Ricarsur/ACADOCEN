@@ -1,6 +1,4 @@
 import 'package:acadocen/UI/pages/qr/scanQr.dart';
-import 'package:acadocen/UI/pages/students/new_student.dart';
-import 'package:acadocen/UI/widgets/assistance_student.dart';
 import 'package:acadocen/UI/widgets/button.dart';
 import 'package:acadocen/UI/widgets/widgets.dart';
 import 'package:acadocen/domain/services/student/data_student.dart';
@@ -8,6 +6,9 @@ import 'package:acadocen/domain/utils/date_utils.dart' as date_utils;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../../models/estudiante.dart';
+import '../../../models/materia.dart';
+import '../../widgets/assistance_student.dart';
 import '../asistencia/attendance.dart';
 
 class StudentList extends StatefulWidget {
@@ -20,11 +21,20 @@ class StudentList extends StatefulWidget {
 }
 
 class _StudentListState extends State<StudentList> {
+  final List<Estudiante> lista = [];
+
+  void refrescar() {
+    Get.forceAppUpdate();
+  }
+
   DataStudent data = DataStudent();
   late ScrollController scrollController;
   List<DateTime> currentMonthsList = List.empty();
   DateTime _dateNow = DateTime.now();
   late String monthName = DateFormat('MMM').format(_dateNow);
+
+  final TextEditingController _identificacion = TextEditingController();
+  final TextEditingController _nombre = TextEditingController();
 
   void initState() {
     super.initState();
@@ -74,7 +84,14 @@ class _StudentListState extends State<StudentList> {
             SizedBox(width: 14),
             Button(
               text: 'Enviar',
-              onPressed: () {},
+              onPressed: () async {
+                if (lista.length > 0) {
+                  await data.createAttendance(
+                      widget.idGroup!, DateTime.now(), widget.idCourse!, lista);
+                } else {
+                  Get.snackbar('Error', 'No hay estudiantes para enviar');
+                }
+              },
               width: 140,
             ),
             SizedBox(width: 14),
@@ -100,10 +117,55 @@ class _StudentListState extends State<StudentList> {
                   color: Colors.white,
                 ),
                 onPressed: () {
-                  Get.to(() => NewStudent(
-                        idCourse: widget.idCourse,
-                        idGroup: widget.idGroup,
-                      ));
+                  _identificacion.text = '';
+                  _nombre.text = '';
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      title: Text('Agregar Estudiante'),
+                      content: Container(
+                        height: 100,
+                        child: Column(
+                          children: [
+                            TextField(
+                              keyboardType: TextInputType.number,
+                              controller: _identificacion,
+                              decoration: InputDecoration(
+                                hintText: 'Identifiacion',
+                              ),
+                            ),
+                            TextField(
+                              controller: _nombre,
+                              decoration: InputDecoration(
+                                hintText: 'Nombre completo',
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, 'Cancel'),
+                          child: const Text('Cancel'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              lista.add(Estudiante(
+                                  materia: Materia(
+                                      nombreCourse: widget.idCourse!,
+                                      numberGroup: widget.idGroup!),
+                                  uid: _identificacion.text,
+                                  nombre: _nombre.text));
+                            });
+
+                            Navigator.pop(context);
+                          },
+                          child: const Text('Agregar'),
+                        ),
+                      ],
+                    ),
+                  );
                 },
               ),
             ),
@@ -192,25 +254,14 @@ class _StudentListState extends State<StudentList> {
                 ],
               ),
               SizedBox(height: 10),
-
-              FutureBuilder(
-                  future: data.getStudent(
-                      widget.idCourse.toString(), widget.idGroup.toString()),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return ListView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: data.dataStudent.length,
-                          itemBuilder: (context, index) {
-                            return AssistanceStudent(
-                                nameStudent:
-                                    data.dataStudent[index].toString());
-                          });
-                    } else {
-                      return Center(child: CircularProgressIndicator());
-                    }
-                  }),
+              ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemCount: lista.length,
+                itemBuilder: (context, index) {
+                  return AssistanceStudent(nameStudent: lista[index].nombre);
+                },
+              )
               //AssistanceStudent(nameStudent: 'David Ravelo Bonett'),
             ]),
           )),

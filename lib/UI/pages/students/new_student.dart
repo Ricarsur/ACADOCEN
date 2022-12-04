@@ -1,7 +1,5 @@
 import 'package:acadocen/UI/pages/pages.dart';
 import 'package:acadocen/domain/services/student/data_student.dart';
-import 'package:acadocen/models/estudiante.dart';
-import 'package:acadocen/models/materia.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -53,16 +51,7 @@ class _NewStudentState extends State<NewStudent> {
                     SizedBox(height: 50),
                     Button(
                       text: 'Registrar',
-                      onPressed: () async {
-                        await student.createStudent(
-                          Estudiante(
-                              nombre: _nombreEstudent.text,
-                              uid: _idEstudent.text,
-                              materia: Materia(
-                                  nombreCourse: widget.idCourse,
-                                  numberGroup: widget.idGroup)),
-                        );
-                      },
+                      onPressed: () async {},
                       width: 200,
                     ),
                   ],
