@@ -32,125 +32,139 @@ class _ScheduleState extends State<Schedule> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 50, 10, 0),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          date_utils.DateUtils.weekdays[_dateNow.weekday - 1],
-                          style: const TextStyle(
-                              fontSize: 26,
-                              color: Color.fromARGB(255, 106, 106, 106),
-                              fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                            date_utils.DateUtils.months[_dateNow.month - 1] +
-                                ' ' +
-                                _dateNow.day.toString() +
-                                ', ' +
-                                _dateNow.year.toString(),
-                            style: TextStyle(
-                                fontSize: 14,
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+          body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(10, 50, 10, 0),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            date_utils.DateUtils.weekdays[_dateNow.weekday - 1],
+                            style: const TextStyle(
+                                fontSize: 26,
                                 color: Color.fromARGB(255, 106, 106, 106),
-                                fontWeight: FontWeight.w600)),
-                      ],
-                    ),
-                    const Spacer(),
-                    InkWell(
-                      onTap: () {
-                        showExitPopup();
-                      },
-                      child: Icon(Icons.exit_to_app,
-                          color: Color.fromARGB(255, 106, 106, 106)),
-                    )
-                  ],
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                              date_utils.DateUtils.months[_dateNow.month - 1] +
+                                  ' ' +
+                                  _dateNow.day.toString() +
+                                  ', ' +
+                                  _dateNow.year.toString(),
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  color: Color.fromARGB(255, 106, 106, 106),
+                                  fontWeight: FontWeight.w600)),
+                        ],
+                      ),
+                      const Spacer(),
+                      InkWell(
+                        onTap: () {
+                          showExitPopup();
+                        },
+                        child: Icon(Icons.exit_to_app,
+                            color: Color.fromARGB(255, 106, 106, 106)),
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 20),
-            WeeklyDatePicker(
-              monthName: monthName,
-              selectedDay: _dateNow,
-              changeDay: (value) => setState(() {
-                _dateNow = value;
-                print(fecha);
-                fecha = value;
-                print(fecha);
-              }),
-              enableWeeknumberText: false,
-              weeknumberColor: const Color.fromARGB(255, 30, 82, 160),
-              weeknumberTextColor: const Color.fromARGB(255, 186, 5, 5),
-              weekdayTextColor: const Color.fromARGB(255, 65, 65, 65),
-              digitsColor: const Color.fromARGB(255, 38, 53, 132),
-              selectedBackgroundColor: const Color.fromARGB(255, 71, 71, 198),
-              weekdays: const ["Lun", "Mar", "Mie", "Jue", "Vie", "Sáb", "Dom"],
-              daysInWeek: 7,
-            ),
-            FutureBuilder(
-                future: DataHorario.getShedule(fecha),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      physics: const ScrollPhysics(),
-                      itemCount: DataHorario.dataSchedule.length,
-                      itemBuilder: (context, index) {
-                        if (DataHorario.dataSchedule.length < 1) {
-                          return Column(
-                            children: [
-                              SizedBox(height: 80),
-                              Image.asset(
-                                'assets/images/claritysad.png',
-                                width: 80,
-                              ),
-                              SizedBox(height: 10),
-                              Text(
-                                '¡Aún no tienes ningún horario creado',
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                'agregue nuevas tareas para que \nsu día sea productivo',
-                                style: TextStyle(fontSize: 16),
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          );
-                        } else {
-                          return CardSchedule(
-                            nombreHorario:
-                                DataHorario.dataSchedule[index].nombreHorario,
-                            grupo: DataHorario.dataSchedule[index].grupo,
-                            horaInicio:
-                                DataHorario.dataSchedule[index].horaInicio,
-                            horaFinal:
-                                DataHorario.dataSchedule[index].horaFinal,
-                          );
-                        }
-                      },
-                    );
-                  } else {
-                    return const Center(child: CircularProgressIndicator());
-                  }
+              SizedBox(height: 20),
+              WeeklyDatePicker(
+                monthName: monthName,
+                selectedDay: _dateNow,
+                changeDay: (value) => setState(() {
+                  _dateNow = value;
+                  print(fecha);
+                  fecha = value;
+                  print(fecha);
                 }),
-          ],
+                enableWeeknumberText: false,
+                weeknumberColor: const Color.fromARGB(255, 30, 82, 160),
+                weeknumberTextColor: const Color.fromARGB(255, 186, 5, 5),
+                weekdayTextColor: const Color.fromARGB(255, 65, 65, 65),
+                digitsColor: const Color.fromARGB(255, 38, 53, 132),
+                selectedBackgroundColor: const Color.fromARGB(255, 71, 71, 198),
+                weekdays: const [
+                  "Lun",
+                  "Mar",
+                  "Mie",
+                  "Jue",
+                  "Vie",
+                  "Sáb",
+                  "Dom"
+                ],
+                daysInWeek: 7,
+              ),
+              FutureBuilder(
+                  future: DataHorario.getShedule(fecha),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        physics: const ScrollPhysics(),
+                        itemCount: DataHorario.dataSchedule.length,
+                        itemBuilder: (context, index) {
+                          if (DataHorario.dataSchedule.length < 1) {
+                            return Column(
+                              children: [
+                                SizedBox(height: 80),
+                                Image.asset(
+                                  'assets/images/claritysad.png',
+                                  width: 80,
+                                ),
+                                SizedBox(height: 10),
+                                Text(
+                                  '¡Aún no tienes ningún horario creado',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  'agregue nuevas tareas para que \nsu día sea productivo',
+                                  style: TextStyle(fontSize: 16),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            );
+                          } else {
+                            return CardSchedule(
+                              nombreHorario:
+                                  DataHorario.dataSchedule[index].nombreHorario,
+                              grupo: DataHorario.dataSchedule[index].grupo,
+                              horaInicio:
+                                  DataHorario.dataSchedule[index].horaInicio,
+                              horaFinal:
+                                  DataHorario.dataSchedule[index].horaFinal,
+                            );
+                          }
+                        },
+                      );
+                    } else {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                  }),
+            ],
+          ),
         ),
-      ),
-    ));
+      )),
+    );
   }
 
   Future<bool> showExitPopup() async {
