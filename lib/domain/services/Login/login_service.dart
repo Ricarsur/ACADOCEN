@@ -1,3 +1,4 @@
+import 'package:acadocen/UI/widgets/background_loading.dart';
 import 'package:acadocen/domain/services/services.dart';
 import 'package:acadocen/models/usuario.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -28,7 +29,7 @@ class LoginService {
     showDialog(
         context: context,
         builder: (context) {
-          return Center(child: CircularProgressIndicator());
+          return BackgroundLoading(ruta: '');
         });
     bool mensaje = false;
     String identificacion = '';

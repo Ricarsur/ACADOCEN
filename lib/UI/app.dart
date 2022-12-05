@@ -17,7 +17,7 @@ class _AppState extends State<App> {
       debugShowCheckedModeBanner: false,
       title: 'Acadocen',
       theme: ThemeApp.themeLight,
-      initialRoute: AppRoutes.login,
+      initialRoute: AppRoutes.loading,
       getPages: AppRoutes.all,
     );
   }

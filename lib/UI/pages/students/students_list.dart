@@ -1,10 +1,12 @@
-import 'package:acadocen/UI/pages/qr/scanQr.dart';
+import 'dart:io';
+
 import 'package:acadocen/UI/widgets/button.dart';
 import 'package:acadocen/UI/widgets/widgets.dart';
 import 'package:acadocen/domain/services/student/data_student.dart';
 import 'package:acadocen/domain/utils/date_utils.dart' as date_utils;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 import '../../../models/estudiante.dart';
 import '../../../models/materia.dart';
@@ -21,6 +23,22 @@ class StudentList extends StatefulWidget {
 }
 
 class _StudentListState extends State<StudentList> {
+  String identificacion = '';
+  String nombre = '';
+  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  Barcode? result;
+  QRViewController? controller;
+
+  @override
+  void reassemble() {
+    super.reassemble();
+    if (Platform.isAndroid) {
+      controller!.pauseCamera();
+    } else if (Platform.isIOS) {
+      controller!.resumeCamera();
+    }
+  }
+
   final List<Estudiante> lista = [];
 
   void refrescar() {
@@ -47,7 +65,6 @@ class _StudentListState extends State<StudentList> {
 
   @override
   Widget build(BuildContext context) {
-    var _query = MediaQuery.of(context).size;
     return WillPopScope(
       onWillPop: () async {
         Get.offAll(() => GroupList(idCourse: widget.idCourse!));
@@ -225,7 +242,49 @@ class _StudentListState extends State<StudentList> {
                     Spacer(),
                     InkWell(
                         onTap: () {
-                          Get.to(() => const ScanQr());
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              title: Text('Escanear QR'),
+                              content: Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.5,
+                                child: Expanded(
+                                  flex: 5,
+                                  child: QRView(
+                                    key: qrKey,
+                                    onQRViewCreated: _onQRViewCreated,
+                                  ),
+                                ),
+                              ),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, 'Cancel'),
+                                  child: const Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    if (nombre != '' && identificacion != '') {
+                                      lista.add(Estudiante(
+                                          materia: Materia(
+                                              nombreCourse: widget.idCourse!,
+                                              numberGroup: widget.idGroup!),
+                                          uid: identificacion,
+                                          nombre: nombre));
+                                      nombre = '';
+                                      identificacion = '';
+                                      Navigator.pop(context, 'OK');
+                                    } else {
+                                      Get.snackbar('Error',
+                                          'Codigo no escaneado correctamente');
+                                    }
+                                  },
+                                  child: const Text('Ecanear'),
+                                ),
+                              ],
+                            ),
+                          );
                         },
                         child:
                             Image.asset('assets/images/scaner.png', height: 20))
@@ -278,5 +337,24 @@ class _StudentListState extends State<StudentList> {
         ),
       ),
     );
+  }
+
+  void _onQRViewCreated(QRViewController controller) {
+    this.controller = controller;
+    var split = [];
+    controller.scannedDataStream.listen((scanData) {
+      setState(() {
+        result = scanData;
+        split = result!.code.toString().split(';');
+        identificacion = split[0];
+        nombre = split[1];
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
   }
 }
