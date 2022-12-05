@@ -77,7 +77,8 @@ class _StudentListState extends State<StudentList> {
                   color: Colors.white,
                 ),
                 onPressed: () {
-                  Get.to(() => AttendanceQuery());
+                  Get.to(() => AttendanceQuery(
+                      idCourse: widget.idCourse, idGroup: widget.idGroup));
                 },
               ),
             ),
@@ -150,16 +151,18 @@ class _StudentListState extends State<StudentList> {
                         ),
                         TextButton(
                           onPressed: () {
-                            setState(() {
+                            if (_identificacion.text.isNotEmpty &&
+                                _nombre.text.isNotEmpty) {
                               lista.add(Estudiante(
                                   materia: Materia(
                                       nombreCourse: widget.idCourse!,
                                       numberGroup: widget.idGroup!),
                                   uid: _identificacion.text,
                                   nombre: _nombre.text));
-                            });
-
-                            Navigator.pop(context);
+                              Navigator.pop(context, 'OK');
+                            } else {
+                              Get.snackbar('Error', 'Campos vacios');
+                            }
                           },
                           child: const Text('Agregar'),
                         ),
@@ -186,7 +189,7 @@ class _StudentListState extends State<StudentList> {
                     color: Color.fromRGBO(84, 100, 255, 1),
                     iconSize: 30,
                     onPressed: () {
-                      Navigator.pop(context);
+                      Get.to(() => GroupList(idCourse: widget.idCourse!));
                     },
                   ),
                   SizedBox(width: 10),
