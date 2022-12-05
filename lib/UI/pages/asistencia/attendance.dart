@@ -1,8 +1,7 @@
 import 'package:acadocen/domain/services/student/data_student.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../../../misc/colors.dart';
+import '../../widgets/widgets.dart';
 import '../students/students_list.dart';
 
 class AttendanceQuery extends StatefulWidget {
@@ -102,7 +101,18 @@ class _AttendanceQueryState extends State<AttendanceQuery> {
                             );
                           });
                     } else {
-                      return Center(child: CircularProgressIndicator());
+                      return Center(
+                        child: SpinKitFadingCube(
+                          size: 30,
+                          itemBuilder: (BuildContext context, int index) {
+                            return DecoratedBox(
+                              decoration: BoxDecoration(
+                                color: ColorsApp.gradiant1,
+                              ),
+                            );
+                          },
+                        ),
+                      );
                     }
                   })
             ]),

@@ -1,6 +1,7 @@
 import 'package:acadocen/UI/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:acadocen/domain/utils/date_utils.dart' as date_utils;
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 import '../../../domain/services/horario/data_horario.dart';
@@ -157,7 +158,19 @@ class _ScheduleState extends State<Schedule> {
                         },
                       );
                     } else {
-                      return const Center(child: CircularProgressIndicator());
+                      return Center(
+                          child: Center(
+                        child: SpinKitFadingCube(
+                          size: 30,
+                          itemBuilder: (BuildContext context, int index) {
+                            return DecoratedBox(
+                              decoration: BoxDecoration(
+                                color: ColorsApp.gradiant1,
+                              ),
+                            );
+                          },
+                        ),
+                      ));
                     }
                   }),
             ],

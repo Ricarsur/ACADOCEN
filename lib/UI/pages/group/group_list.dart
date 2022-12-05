@@ -106,7 +106,19 @@ class _GroupListState extends State<GroupList> {
                               );
                             });
                       } else {
-                        return Center(child: CircularProgressIndicator());
+                        return Center(
+                            child: Center(
+                          child: SpinKitFadingCube(
+                            size: 30,
+                            itemBuilder: (BuildContext context, int index) {
+                              return DecoratedBox(
+                                decoration: BoxDecoration(
+                                  color: ColorsApp.gradiant1,
+                                ),
+                              );
+                            },
+                          ),
+                        ));
                       }
                     })
               ]),

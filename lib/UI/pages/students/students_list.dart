@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:acadocen/UI/widgets/button.dart';
 import 'package:acadocen/UI/widgets/widgets.dart';
 import 'package:acadocen/domain/services/student/data_student.dart';
@@ -30,15 +28,6 @@ class _StudentListState extends State<StudentList> {
   QRViewController? controller;
 
   @override
-  void reassemble() {
-    super.reassemble();
-    if (Platform.isAndroid) {
-      controller!.pauseCamera();
-    } else if (Platform.isIOS) {
-      controller!.resumeCamera();
-    }
-  }
-
   final List<Estudiante> lista = [];
 
   void refrescar() {

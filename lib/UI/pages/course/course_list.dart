@@ -59,7 +59,18 @@ class _CourseListState extends State<CourseList> {
                                   );
                                 });
                           } else {
-                            return Center(child: CircularProgressIndicator());
+                            return Center(
+                              child: SpinKitFadingCube(
+                                size: 30,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      color: ColorsApp.gradiant1,
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
                           }
                         }),
                   ]),
