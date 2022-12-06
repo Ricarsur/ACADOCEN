@@ -10,16 +10,18 @@ class AssistanceStudent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10.0),
-      child: Container(
-        child: Row(
-          children: [
-            Text(nameStudent,
-                overflow: TextOverflow.ellipsis,
-                style: (TextStyle(
-                    color: ColorsApp.title,
-                    fontSize: 19,
-                    fontWeight: FontWeight.w500))),
-          ],
+      child: InkWell(
+        child: Container(
+          child: Row(
+            children: [
+              Text(nameStudent,
+                  overflow: TextOverflow.ellipsis,
+                  style: (TextStyle(
+                      color: ColorsApp.title,
+                      fontSize: 19,
+                      fontWeight: FontWeight.w500))),
+            ],
+          ),
         ),
       ),
     );

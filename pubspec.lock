@@ -226,6 +226,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.4"
+  majascan:
+    dependency: "direct main"
+    description:
+      name: majascan
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.5.0"
   matcher:
     dependency: transitive
     description:

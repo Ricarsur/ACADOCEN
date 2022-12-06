@@ -1,4 +1,3 @@
-import 'package:acadocen/UI/pages/qr/scanQr.dart';
 import 'package:acadocen/UI/widgets/button.dart';
 import 'package:acadocen/UI/widgets/widgets.dart';
 import 'package:acadocen/domain/services/student/data_student.dart';
@@ -21,6 +20,8 @@ class StudentList extends StatefulWidget {
 }
 
 class _StudentListState extends State<StudentList> {
+  String result = "";
+
   final List<Estudiante> lista = [];
 
   void refrescar() {
@@ -221,9 +222,7 @@ class _StudentListState extends State<StudentList> {
                     ),
                     Spacer(),
                     InkWell(
-                        onTap: () {
-                          Get.to(() => const ScanQr());
-                        },
+                        onTap: () {},
                         child:
                             Image.asset('assets/images/scaner.png', height: 20))
                   ],
@@ -260,6 +259,7 @@ class _StudentListState extends State<StudentList> {
                   ],
                 ),
                 SizedBox(height: 10),
+                Text(result, style: TextStyle(color: Colors.red)),
                 ListView.builder(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,

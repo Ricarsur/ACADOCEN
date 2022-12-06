@@ -88,6 +88,34 @@ class DataStudent {
     return dataStudent;
   }
 
+  Future<dynamic> getListStudents(
+      String grupo, String materia, String nombreList) async {
+    print(materia);
+    print(grupo);
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+    dataStudent.clear();
+    await FirebaseFirestore.instance
+        .collection('usuario')
+        .doc(user.uid)
+        .collection('materias')
+        .doc(materia)
+        .collection('grupos')
+        .doc(grupo)
+        .collection('asistencia')
+        .doc(nombreList)
+        .collection('estudiante')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        dataStudent.add(doc['nombre']);
+        print(doc['nombre']);
+      });
+    });
+
+    return dataStudent;
+  }
+
   deleteAttendance(String grupo, String materia, String nombre) async {
     final User? user = auth.currentUser;
     final uid = user!.uid;

@@ -1,3 +1,4 @@
+import 'package:acadocen/UI/pages/asistencia/student_list_attendance.dart';
 import 'package:acadocen/domain/services/student/data_student.dart';
 import 'package:flutter/material.dart';
 
@@ -63,7 +64,12 @@ class _AttendanceQueryState extends State<AttendanceQuery> {
                               return Padding(
                                 padding: const EdgeInsets.only(bottom: 10),
                                 child: InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Get.to(StudentListAttendance(
+                                        idCourse: widget.idCourse,
+                                        idGroup: widget.idGroup,
+                                        nombre: student.dataStudent[index]));
+                                  },
                                   onLongPress: () {
                                     _eliminar(
                                         context,
