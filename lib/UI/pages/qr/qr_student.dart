@@ -13,62 +13,68 @@ class _QrStudentState extends State<QrStudent> {
   @override
   Widget build(BuildContext context) {
     final arguments = ModalRoute.of(context)?.settings.arguments;
-    return Scaffold(
-      body: Center(
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text('Tu código QR',
-                              style: TextStyle(
-                                fontSize: 23,
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromRGBO(98, 96, 96, 1),
-                              )),
-                          SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.22),
-                          InkWell(
-                            onTap: () {
-                              showExitPopup();
-                            },
-                            child: Icon(Icons.exit_to_app,
-                                color: Color.fromARGB(255, 106, 106, 106)),
-                          )
-                        ],
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        body: Center(
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text('Tu código QR',
+                                style: TextStyle(
+                                  fontSize: 23,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color.fromRGBO(98, 96, 96, 1),
+                                )),
+                            SizedBox(
+                                width:
+                                    MediaQuery.of(context).size.width * 0.22),
+                            InkWell(
+                              onTap: () {
+                                showExitPopup();
+                              },
+                              child: Icon(Icons.exit_to_app,
+                                  color: Color.fromARGB(255, 106, 106, 106)),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 15),
-                    Text('Tu profesor debe escanear este código',
-                        style: TextStyle(
-                            fontSize: 15,
-                            color: Color.fromRGBO(98, 96, 96, 1),
-                            fontWeight: FontWeight.w600)),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                  child: QrImage(
-                    data: arguments.toString(),
-                    version: QrVersions.auto,
-                    size: 300.0,
-                    foregroundColor: Color.fromARGB(255, 40, 102, 173),
-                    gapless: true,
-                    errorCorrectionLevel: QrErrorCorrectLevel.Q,
+                      SizedBox(height: 15),
+                      Text('Tu profesor debe escanear este código',
+                          style: TextStyle(
+                              fontSize: 15,
+                              color: Color.fromRGBO(98, 96, 96, 1),
+                              fontWeight: FontWeight.w600)),
+                    ],
                   ),
-                ),
-                Image.asset('assets/images/qr-paint.png',
-                    width: MediaQuery.of(context).size.width)
-              ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: QrImage(
+                      data: arguments.toString(),
+                      version: QrVersions.auto,
+                      size: 300.0,
+                      foregroundColor: Color.fromARGB(255, 40, 102, 173),
+                      gapless: true,
+                      errorCorrectionLevel: QrErrorCorrectLevel.Q,
+                    ),
+                  ),
+                  Image.asset('assets/images/qr-paint.png',
+                      width: MediaQuery.of(context).size.width)
+                ],
+              ),
             ),
           ),
         ),
