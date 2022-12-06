@@ -27,7 +27,7 @@ class DataStudent {
           .collection('grupos')
           .doc(grupo)
           .collection('asistencia')
-          .doc(fecha.toString())
+          .doc(DateFormat('EEEE, MMM d, yyyy').format(fecha))
           .collection('estudiante')
           .add({
         'nombre': element.nombre,
